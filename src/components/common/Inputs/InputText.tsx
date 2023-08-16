@@ -1,13 +1,27 @@
 import { TextInput, TextInputProps } from '@mantine/core'
+import { Controller } from 'react-hook-form'
 
 type TInputTextProps = {
   name: string
-} & TextInputProps
-const InputText = ({ ...props }: TInputTextProps) => {
+  required?: boolean
+} & Omit<TextInputProps, 'required'>
+
+const InputText = ({ name, ...props }: TInputTextProps) => {
   return (
-    <div>
-      <TextInput {...props} />
-    </div>
+    <Controller
+      name={name}
+      render={({ field: { ref, value, ...field }, fieldState }) => {
+        return (
+          <TextInput
+            ref={ref}
+            {...props}
+            {...field}
+            value={value ?? ''}
+            error={fieldState.error?.message}
+          />
+        )
+      }}
+    />
   )
 }
 
