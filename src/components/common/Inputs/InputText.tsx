@@ -6,7 +6,7 @@ type TInputTextProps = {
 const InputText = ({ ...props }: TInputTextProps) => {
   return (
     <div>
-      <TextInput error={'hek'} {...props} />
+      <TextInput {...props} />
     </div>
   )
 }
