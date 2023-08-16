@@ -1,9 +1,13 @@
 import { MantineProvider } from '@mantine/core'
+import { AppRouter } from './views/@Router.tsx'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      Your app here
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </MantineProvider>
   )
 }
