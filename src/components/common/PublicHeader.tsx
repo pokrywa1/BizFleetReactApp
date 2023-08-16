@@ -1,15 +1,24 @@
-import { Button, Group, Header, Text } from '@mantine/core'
+import { Group, Header, Text } from '@mantine/core'
+import ButtonLink from './Buttons/ButtonLink.tsx'
+import { routes } from '../../app/router'
+import { Link } from 'react-router-dom'
 
 const PublicHeader = () => {
   return (
     <Header height={60}>
       <Group noWrap position="apart" sx={{ height: '100%' }}>
-        <Text fz={'xl'} fw={'bold'}>
-          BizFleet
-        </Text>
+        <Link to={routes['index']}>
+          <Text fz={'xl'} fw={'bold'}>
+            BizFleet
+          </Text>
+        </Link>
         <Group position="center">
-          <Button variant="default">Log in</Button>
-          <Button>Sign up</Button>
+          <ButtonLink variant={'outline'} to={routes['auth.login']} size="md">
+            Logowanie
+          </ButtonLink>
+          <ButtonLink to={routes['auth.login']} size="md">
+            Rejestracja
+          </ButtonLink>
         </Group>
       </Group>
     </Header>

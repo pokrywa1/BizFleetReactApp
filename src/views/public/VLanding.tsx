@@ -1,16 +1,8 @@
-import {
-  createStyles,
-  Image,
-  Title,
-  Button,
-  Group,
-  Text,
-  List,
-  ThemeIcon,
-  rem,
-} from '@mantine/core'
+import { createStyles, Image, Title, Group, Text, List, ThemeIcon, rem } from '@mantine/core'
 import image from '../../../public/heroCar.svg'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
+import ButtonLink from '../../components/common/Buttons/ButtonLink.tsx'
+import { routes } from '../../app/router'
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -103,9 +95,9 @@ const VLanding = () => {
         </List>
 
         <Group mt={30}>
-          <Button radius="xl" size="md" className={classes.control}>
+          <ButtonLink to={routes['auth.login']} size="md" className={classes.control}>
             Zacznij już teraz
-          </Button>
+          </ButtonLink>
         </Group>
       </div>
       <Image src={image} className={classes.image} />

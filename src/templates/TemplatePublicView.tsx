@@ -1,6 +1,8 @@
 import { Container } from '@mantine/core'
 import { Outlet } from 'react-router-dom'
 import PublicHeader from '../components/common/PublicHeader.tsx'
+import { Suspense } from 'react'
+import AppBarLoader from '../components/common/AppBarLoader.tsx'
 
 export function TemplatePublicView() {
   return (
@@ -9,7 +11,9 @@ export function TemplatePublicView() {
         <PublicHeader />
       </Container>
       <Container>
-        <Outlet />
+        <Suspense fallback={<AppBarLoader />}>
+          <Outlet />
+        </Suspense>
       </Container>
     </>
   )
