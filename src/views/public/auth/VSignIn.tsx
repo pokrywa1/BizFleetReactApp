@@ -1,5 +1,6 @@
-const VSignIn = () => {
-  return <div>Logowanie</div>
-}
+import SignIn from '../../../components/public/auth/SignIn.tsx'
 
+const VSignIn = () => {
+  return <SignIn />
+}
 export default VSignIn
