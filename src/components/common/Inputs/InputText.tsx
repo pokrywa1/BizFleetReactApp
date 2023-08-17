@@ -1,5 +1,5 @@
 import { TextInput, TextInputProps } from '@mantine/core'
-import { Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 type TInputTextProps = {
   name: string
@@ -7,9 +7,12 @@ type TInputTextProps = {
 } & Omit<TextInputProps, 'required'>
 
 const InputText = ({ name, ...props }: TInputTextProps) => {
+  const { control } = useFormContext()
+
   return (
     <Controller
       name={name}
+      control={control}
       render={({ field: { ref, value, ...field }, fieldState }) => {
         return (
           <TextInput
