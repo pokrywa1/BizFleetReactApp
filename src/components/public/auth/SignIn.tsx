@@ -1,36 +1,21 @@
 import { Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core'
 import InputText from '../../common/Inputs/InputText.tsx'
 import InputPassword from '../../common/Inputs/InputPassword.tsx'
-import { FormProvider, useForm } from 'react-hook-form'
-import { postSignIn, signInSchema } from '../../../app/api/public/auth/postSigIn.tsx'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { useMutation } from 'react-query'
+import { FormProvider } from 'react-hook-form'
+import {
+  postSignIn,
+  signInSchema,
+  TSignInFormFields,
+} from '../../../app/api/public/auth/postSigIn.tsx'
+
+import useFormMutation from '../../../app/hook/useFormMutation.tsx'
 
 const SignIn = () => {
-  const methods = useForm<TSignInFormFields>({
-    resolver: yupResolver(signInSchema),
-  })
-
-  const mutation = useMutation('auth.sigin', postSignIn)
-
-  const onSubmit = methods.handleSubmit((data) => mutation.mutateAsync(data))
-
-  type TSignInFormFields = yup.InferType<typeof signInSchema>
-
-  const inputNames: (keyof TSignInFormFields)[] = Object.keys(
-    signInSchema.fields,
-  ) as (keyof TSignInFormFields)[]
-
-  const inputNamesMap: Record<keyof TSignInFormFields, string> = inputNames.reduce(
-    (map, fieldName) => {
-      map[fieldName] = fieldName
-      return map
-    },
-    {} as Record<keyof TSignInFormFields, string>,
+  const { handleSubmit, inputsNames, methods } = useFormMutation<TSignInFormFields>(
+    signInSchema,
+    postSignIn,
   )
 
-  console.log(inputNamesMap) // 'email'
   return (
     <Container size={420} my={40}>
       <Title
@@ -48,9 +33,14 @@ const SignIn = () => {
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <FormProvider {...methods}>
-          <form onSubmit={onSubmit}>
-            <InputText name={'email'} label="Email" placeholder="you@bizfleet.com" />
-            <InputPassword name={'password'} label="Password" placeholder="Your password" mt="md" />
+          <form onSubmit={handleSubmit}>
+            <InputText name={inputsNames.email} label="Email" placeholder="you@bizfleet.com" />
+            <InputPassword
+              name={inputsNames.password}
+              label="Password"
+              placeholder="Your password"
+              mt="md"
+            />
             <Group position="apart" mt="lg">
               <Anchor component="button" size="sm">
                 Forgot password?
