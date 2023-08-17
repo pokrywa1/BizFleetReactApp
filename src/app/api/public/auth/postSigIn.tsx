@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 export type TSignInFormFields = {
   email: string
@@ -10,10 +10,15 @@ export const signInSchema = yup.object().shape({
   email: yup.string().required('e-mail wymagany'),
   password: yup.string().required('e-mail wymagany'),
 })
-export const postSignIn = (data: TSignInFormFields) => {
+export type TSignInFormResponse = {
+  accessToken: string
+}
+export const postSignIn = (
+  data: TSignInFormFields,
+): Promise<AxiosResponse<TSignInFormResponse>['data']> => {
   return axios({
     method: 'POST',
     data: data,
     url: 'http://localhost:5000/users/sign-in',
-  })
+  }).then(({ data }) => data)
 }

@@ -6,15 +6,18 @@ import {
   postSignIn,
   signInSchema,
   TSignInFormFields,
+  TSignInFormResponse,
 } from '../../../app/api/public/auth/postSigIn.tsx'
 
 import useFormMutation from '../../../app/hook/useFormMutation.tsx'
 
 const SignIn = () => {
-  const { handleSubmit, inputsNames, methods } = useFormMutation<TSignInFormFields>(
-    signInSchema,
-    postSignIn,
-  )
+  const { handleSubmit, inputsNames, methods } = useFormMutation<
+    TSignInFormFields,
+    TSignInFormResponse
+  >(signInSchema, postSignIn, {
+    onSuccess: (data) => console.log(data.accessToken),
+  })
 
   return (
     <Container size={420} my={40}>
