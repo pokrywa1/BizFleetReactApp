@@ -10,13 +10,18 @@ import {
 } from '../../../app/api/public/auth/postSigIn.tsx'
 
 import useFormMutation from '../../../app/hook/useFormMutation.tsx'
+import { useDispatch } from 'react-redux'
+import { setAuthStore } from '../../../app/redux/store.ts'
 
 const SignIn = () => {
+  const dispatch = useDispatch()
   const { handleSubmit, inputsNames, methods } = useFormMutation<
     TSignInFormFields,
     TSignInFormResponse
   >(signInSchema, postSignIn, {
-    onSuccess: (data) => console.log(data.accessToken),
+    onSuccess: (data) => {
+      dispatch(setAuthStore(data))
+    },
   })
 
   return (

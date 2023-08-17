@@ -11,7 +11,7 @@ export const signInSchema = yup.object().shape({
   password: yup.string().required('e-mail wymagany'),
 })
 export type TSignInFormResponse = {
-  accessToken: string
+  accessToken: string | null
 }
 export const postSignIn = (
   data: TSignInFormFields,
