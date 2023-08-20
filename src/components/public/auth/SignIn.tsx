@@ -11,15 +11,24 @@ import {
 
 import useFormMutation from '../../../app/hook/useFormMutation.tsx'
 import useUserStore from '../../../app/store/useUserStore.ts'
+import useLocalStorage from '../../../app/hook/localStorage/useLocalStorage.ts'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../../app/router'
 
 const SignIn = () => {
+  const [, setJwt] = useLocalStorage<string | null>('jwt', null)
   const { setUserAuth } = useUserStore()
+  const navigate = useNavigate()
   const { handleSubmit, inputsNames, methods } = useFormMutation<
     TSignInFormFields,
     TSignInFormResponse
   >(signInSchema, postSignIn, {
     onSuccess: (data) => {
-      if (data.accessToken) setUserAuth(data.accessToken)
+      if (data.accessToken) {
+        setUserAuth(data.accessToken)
+        setJwt(data.accessToken)
+        navigate(routes['user-panel'])
+      }
     },
   })
 
