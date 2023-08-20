@@ -10,17 +10,21 @@ import {
 } from '../../../app/api/public/auth/postSigIn.tsx'
 
 import useFormMutation from '../../../app/hook/useFormMutation.tsx'
-import { useDispatch } from 'react-redux'
-import { setAuthStore } from '../../../app/redux/store.ts'
+import { useAppSelector } from '../../../app/hook/reduxHook.ts'
+import { _setUser, authSelector } from '../../../app/redux/authSlice.ts'
+import { useAppDispatch } from '../../../app/redux/store.ts'
 
 const SignIn = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const selectedUser = useAppSelector(authSelector)
+
+  console.log(selectedUser)
   const { handleSubmit, inputsNames, methods } = useFormMutation<
     TSignInFormFields,
     TSignInFormResponse
   >(signInSchema, postSignIn, {
     onSuccess: (data) => {
-      dispatch(setAuthStore(data))
+      dispatch(_setUser(data))
     },
   })
 

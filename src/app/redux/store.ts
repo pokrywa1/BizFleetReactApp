@@ -1,23 +1,12 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
-import { initialState } from './reducers/authRecuder.ts'
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from './authSlice.ts'
+import { useDispatch } from 'react-redux'
 
-const authSlice = createSlice({
-  name: 'auth',
-  initialState: initialState,
-  reducers: {
-    setAuthStore: (state, action) => {
-      return { ...state, ...action.payload }
-    },
-  },
-})
-
-export const { setAuthStore } = authSlice.actions
-export const authReducer = authSlice.reducer
-
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     auth: authReducer,
   },
 })
-
-export default store
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
+export type RootState = ReturnType<typeof store.getState>
