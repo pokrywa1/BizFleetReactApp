@@ -1,7 +1,8 @@
 import UserSideBar from '../components/common/UserSideBar.tsx'
 import UserHeader from '../components/common/UserHeader.tsx'
-import { createStyles, Text } from '@mantine/core'
+import { createStyles } from '@mantine/core'
 import { NAVBAR_WIDTH } from './userTemplateConsts.ts'
+import { Outlet } from 'react-router-dom'
 
 const useStyle = createStyles((theme) => ({
   sideBarContainer: {
@@ -19,6 +20,7 @@ const useStyle = createStyles((theme) => ({
     maxWidth: '1440px',
     marginRight: 'auto',
     marginLeft: 'auto',
+    boxSizing: 'border-box',
   },
 }))
 export function TemplateUserView() {
@@ -30,7 +32,7 @@ export function TemplateUserView() {
         <UserSideBar />
       </div>
       <div className={classes.appContainer}>
-        <Text>Hej</Text>
+        <Outlet />
       </div>
     </>
   )
