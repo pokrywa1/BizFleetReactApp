@@ -4,7 +4,7 @@ import { SimpleGrid } from '@mantine/core'
 
 const CarsDatatable = () => {
   const { data } = useGetCars()
-  console.log(data)
+
   return (
     <SimpleGrid
       mt={'md'}
@@ -18,6 +18,7 @@ const CarsDatatable = () => {
     >
       {data?.map((item) => (
         <CarCard
+          id={item.id}
           year={item.year}
           imageId={item.carPhotoId}
           model={item.model}

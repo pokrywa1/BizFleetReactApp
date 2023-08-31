@@ -24,7 +24,7 @@ const CarImageDropzone = ({ setFormPhoto }: CarImageDropzoneProps) => {
 
     mutateAsync(fd)
   }
-  console.log(carImageUrl)
+
   return (
     <>
       {carImageUrl ? (

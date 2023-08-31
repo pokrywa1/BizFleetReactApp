@@ -1,5 +1,7 @@
-import { Card, Image, Text, Group, createStyles, Button, rem, Stack } from '@mantine/core'
+import { Card, Image, Text, Group, createStyles, Button, rem, Stack, Modal } from '@mantine/core'
 import { useGetDocument } from '../../../app/api/user/documents/getDocument.tsx'
+import { useState } from 'react'
+import CarAddReservation from './modals/CarAddReservation.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -38,43 +40,53 @@ const useStyles = createStyles((theme) => ({
 }))
 
 type CarCardProps = {
+  id: string
   imageId: string | null
   model: string
   year: number
   plate: string
 }
-const CarCard = ({ plate, year, imageId, model }: CarCardProps) => {
+const CarCard = ({ id, plate, year, imageId, model }: CarCardProps) => {
+  const [openedReservationModal, setOpenedReservationModal] = useState(false)
   const { data } = useGetDocument(imageId)
-
   const { classes } = useStyles()
 
   return (
-    <Card withBorder radius="md" className={classes.card}>
-      <Card.Section className={classes.imageSection}>
-        <Image src={data?.url} alt="Tesla Model S" />
-      </Card.Section>
+    <>
+      <Card withBorder radius="md" className={classes.card}>
+        <Card.Section className={classes.imageSection}>
+          <Image src={data?.url} alt="Tesla Model S" />
+        </Card.Section>
 
-      <Stack my="xs" spacing={'xs'}>
-        <Group position={'apart'}>
-          <Text fw={500}>Marka</Text>
-          <Text fw={400}>{model}</Text>
-        </Group>
-        <Group position={'apart'}>
-          <Text fw={500}>Rocznik</Text>
-          <Text fw={400}>{year}</Text>
-        </Group>
-        <Group position={'apart'}>
-          <Text fw={500}>Rejestracja</Text>
-          <Text fw={400}>{plate}</Text>
-        </Group>
-      </Stack>
+        <Stack my="xs" spacing={'xs'}>
+          <Group position={'apart'}>
+            <Text fw={500}>Marka</Text>
+            <Text fw={400}>{model}</Text>
+          </Group>
+          <Group position={'apart'}>
+            <Text fw={500}>Rocznik</Text>
+            <Text fw={400}>{year}</Text>
+          </Group>
+          <Group position={'apart'}>
+            <Text fw={500}>Rejestracja</Text>
+            <Text fw={400}>{plate}</Text>
+          </Group>
+        </Stack>
 
-      <Card.Section className={classes.section}>
-        <Button fullWidth style={{ flex: 1 }}>
-          Rezerwuj
-        </Button>
-      </Card.Section>
-    </Card>
+        <Card.Section className={classes.section}>
+          <Button onClick={() => setOpenedReservationModal(true)} fullWidth style={{ flex: 1 }}>
+            Rezerwuj
+          </Button>
+        </Card.Section>
+      </Card>
+      <Modal
+        opened={openedReservationModal}
+        onClose={() => setOpenedReservationModal(false)}
+        title={'Rezerwacja samochodu'}
+      >
+        <CarAddReservation id={id} />
+      </Modal>
+    </>
   )
 }
 

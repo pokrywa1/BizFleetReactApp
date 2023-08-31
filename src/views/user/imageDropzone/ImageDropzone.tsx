@@ -11,7 +11,6 @@ const ImageDropzone = () => {
   const [carImageUrl, setCarImageUrl] = useState<string>()
   const { mutateAsync, isLoading } = useMutation(postImage, {
     onSuccess: ({ data }) => setCarImageUrl(data.url),
-    onError: (data) => console.log(data),
   })
   const onDropHandle = (file: File) => {
     const fd = new FormData()
@@ -19,7 +18,7 @@ const ImageDropzone = () => {
 
     mutateAsync(fd)
   }
-  console.log(carImageUrl)
+
   return (
     <>
       <Image width={1} mx="auto" radius="md" src={carImageUrl} alt="Random image" />

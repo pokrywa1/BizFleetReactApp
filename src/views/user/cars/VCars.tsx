@@ -7,7 +7,6 @@ import CarsAddFormModal from '../../../components/user/cars/modals/CarsAddFormMo
 
 const VCars = () => {
   const [openedModal, setOpenedModal] = useState(false)
-  console.log(openedModal)
   return (
     <>
       <Group position={'apart'}>

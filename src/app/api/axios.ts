@@ -4,7 +4,6 @@ export const createAxios = () => {
   axios.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem('jwt')
-      console.log(token)
       if (token) {
         config.headers['Authorization'] = `Bearer ${JSON.parse(token)}`
       }

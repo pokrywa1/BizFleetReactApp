@@ -51,7 +51,7 @@ type NavbarLinkProps = {
 function NavbarLink({ icon: Icon, label, active, onClick, ...props }: NavbarLinkProps) {
   const { classes, cx } = useStyles()
   return (
-    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }} zIndex={10000}>
       <Link {...props}>
         <UnstyledButton
           onClick={onClick}

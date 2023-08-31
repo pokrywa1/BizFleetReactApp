@@ -6,8 +6,10 @@ export type TDocument = {
   id: string
   url: string
 }
-export const getDocument = ({ queryKey }): Promise<AxiosResponse<TDocument>['data']> => {
-  const [_, documentId] = queryKey
+export const getDocument = (
+  documentId: string | null,
+): Promise<AxiosResponse<TDocument>['data']> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   if (!documentId) new Error('getDocument: documentId is undefined or null')
   return axios({
@@ -19,6 +21,6 @@ export const getDocument = ({ queryKey }): Promise<AxiosResponse<TDocument>['dat
 export const useGetDocument = (documentId: string | null) => {
   return useQuery({
     queryKey: ['get.document', documentId],
-    queryFn: getDocument,
+    queryFn: () => getDocument(documentId),
   })
 }
