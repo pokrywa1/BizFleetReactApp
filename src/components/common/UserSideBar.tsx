@@ -14,6 +14,9 @@ import { AiFillCar } from 'react-icons/ai'
 
 import { IconType } from 'react-icons'
 import { HEADER_HEIGHT, NAVBAR_WIDTH } from '../../templates/userTemplateConsts.ts'
+import { IoCarSharp } from 'react-icons/io5'
+import { Link, LinkProps } from 'react-router-dom'
+import { routes } from '../../app/router'
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -43,20 +46,28 @@ type NavbarLinkProps = {
   label: string
   active?: boolean
   onClick?(): void
-}
+} & LinkProps
 
-function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
+function NavbarLink({ icon: Icon, label, active, onClick, ...props }: NavbarLinkProps) {
   const { classes, cx } = useStyles()
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
-      <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
-        <Icon size="1.2rem" />
-      </UnstyledButton>
+      <Link {...props}>
+        <UnstyledButton
+          onClick={onClick}
+          className={cx(classes.link, { [classes.active]: active })}
+        >
+          <Icon size="1.2rem" />
+        </UnstyledButton>
+      </Link>
     </Tooltip>
   )
 }
 
-const mockdata = [{ icon: BiSolidDashboard, label: 'Home' }]
+const mockdata = [
+  { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel'] },
+  { icon: IoCarSharp, label: 'Flota', to: routes['user-panel.cars'] },
+]
 const UserSideBar = () => {
   const [active, setActive] = useState(0)
 
@@ -66,6 +77,7 @@ const UserSideBar = () => {
       key={link.label}
       active={index === active}
       onClick={() => setActive(index)}
+      to={link.to}
     />
   ))
 
@@ -85,7 +97,7 @@ const UserSideBar = () => {
       </Navbar.Section>
       <Navbar.Section>
         <Stack justify="center" spacing={0}>
-          <NavbarLink icon={BiLogOut} label="Logout" />
+          <NavbarLink icon={BiLogOut} label="Logout" to={routes['index']} />
         </Stack>
       </Navbar.Section>
     </Navbar>

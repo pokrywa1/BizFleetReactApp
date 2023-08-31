@@ -1,6 +1,6 @@
 import { ButtonProps } from '@mantine/core'
-import Button from './Button.tsx'
 import { Link, LinkProps } from 'react-router-dom'
+import { Button } from './Button.tsx'
 
 type TButtonProps = {
   children: React.ReactNode

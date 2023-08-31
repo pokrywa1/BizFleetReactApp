@@ -6,9 +6,11 @@ import { TemplateUserView } from '../../templates/TemplateUserView.tsx'
 
 const VUserPanel = lazy(()=>import('./dashboard/VUserPanel.tsx'))
 const VDropzone = lazy(()=>import('./imageDropzone/ImageDropzone.tsx'))
+const VCars = lazy(()=>import('./cars/VCars.tsx'))
 export const UserRoutes=[
   <Route key={routes['user-panel']} path={routes['user-panel']} element={<RequireAuth><TemplateUserView/></RequireAuth>}>
     <Route index element= {<VUserPanel/>}/>
     <Route key={routes['user-panel.dropzone']} path={routes['user-panel.dropzone']} element= {<VDropzone/>}/>
+    <Route key={routes['user-panel.cars']} path={routes['user-panel.cars']} element= {<VCars/>}/>
   </Route>
 ]

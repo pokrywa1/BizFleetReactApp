@@ -1,7 +1,6 @@
 import { Badge, Card, Divider, Group, Text } from '@mantine/core'
-import React from 'react'
-import Button from '../../common/Buttons/Button.tsx'
 import * as dayjs from 'dayjs'
+import { Button } from '../../common/Buttons/Button.tsx'
 
 type UserCurrentReservationCard = {
   model: string
@@ -15,7 +14,6 @@ const UserCurrentReservationCard = ({
   startTime,
   year,
   model,
-  id,
 }: UserCurrentReservationCard) => {
   return (
     <Card shadow={'sm'}>

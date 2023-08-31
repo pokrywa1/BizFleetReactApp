@@ -1,10 +1,13 @@
-import { Button as MantineButton, ButtonProps } from '@mantine/core'
+import { Button as MantineButton, ButtonProps, createPolymorphicComponent } from '@mantine/core'
+import { forwardRef } from 'react'
 
-type TButtonProps = {
-  children: React.ReactNode
-} & Partial<ButtonProps>
-const Button = ({ children, ...props }: TButtonProps) => {
-  return <MantineButton {...props}>{children}</MantineButton>
-}
+type TButtonProps = Partial<ButtonProps>
+const _Button = forwardRef<HTMLButtonElement, TButtonProps>(({ children, ...others }, ref) => (
+  <MantineButton component="button" ref={ref} {...others}>
+    {children}
+  </MantineButton>
+))
 
-export default Button
+_Button.displayName = '_Button'
+
+export const Button = createPolymorphicComponent<'button', ButtonProps>(_Button)
