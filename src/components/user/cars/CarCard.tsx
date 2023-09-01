@@ -7,7 +7,6 @@ import {
   Button,
   rem,
   Stack,
-  Modal,
   ActionIcon,
   Menu,
 } from '@mantine/core'
@@ -19,6 +18,7 @@ import { deleteCar } from '../../../app/api/user/cars/deleteCar.tsx'
 import { TCar } from '../../../app/api/user/cars/getCars.tsx'
 import { AiFillSetting } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs'
+import { Modal, ModalWithTitle } from '../../common/modals/Modal.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -117,20 +117,22 @@ const CarCard = (car: TCar) => {
           </Button>
         </Card.Section>
       </Card>
-      <Modal
+      <ModalWithTitle
         opened={openedReservationModal}
         onClose={() => setOpenedReservationModal(false)}
         title={'Rezerwacja samochodu'}
+        subtext={'Wybierz okres i zatwierdź rezerwacje'}
       >
         <CarAddReservation id={car.id} />
-      </Modal>
+      </ModalWithTitle>
+
       <Modal
         opened={openedDeleteModal}
         onClose={() => setOpenedDeleteModal(false)}
         title={'Usuwanie samochodu'}
       >
         <Group spacing={'xs'} grow>
-          <Button variant={'outline'} onClick={() => setOpenedDeleteModal(false)}>
+          <Button variant={'outline'} color={'gray'} onClick={() => setOpenedDeleteModal(false)}>
             Anuluj
           </Button>
           <Button color={'red'} onClick={() => deleteMutation(car.id)}>
