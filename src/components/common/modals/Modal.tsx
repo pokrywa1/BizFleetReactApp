@@ -6,7 +6,7 @@ type TModalProps = ModalProps
 
 export const Modal = ({ children, ...props }: TModalProps) => {
   return (
-    <MantineModal withCloseButton={false} {...props}>
+    <MantineModal radius={5} centered withCloseButton={false} {...props}>
       {children}
     </MantineModal>
   )

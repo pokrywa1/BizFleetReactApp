@@ -18,7 +18,8 @@ import { deleteCar } from '../../../app/api/user/cars/deleteCar.tsx'
 import { TCar } from '../../../app/api/user/cars/getCars.tsx'
 import { AiFillSetting } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs'
-import { Modal, ModalWithTitle } from '../../common/modals/Modal.tsx'
+import { ModalWithTitle } from '../../common/modals/Modal.tsx'
+import DeleteModal from '../../common/modals/DeleteModal.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -126,20 +127,13 @@ const CarCard = (car: TCar) => {
         <CarAddReservation id={car.id} />
       </ModalWithTitle>
 
-      <Modal
+      <DeleteModal
+        onConfirm={() => deleteMutation(car.id)}
         opened={openedDeleteModal}
         onClose={() => setOpenedDeleteModal(false)}
         title={'Usuwanie samochodu'}
-      >
-        <Group spacing={'xs'} grow>
-          <Button variant={'outline'} color={'gray'} onClick={() => setOpenedDeleteModal(false)}>
-            Anuluj
-          </Button>
-          <Button color={'red'} onClick={() => deleteMutation(car.id)}>
-            Usuń
-          </Button>
-        </Group>
-      </Modal>
+        subtext={'Czy na pewno chcesz usunąć samochód?'}
+      />
     </>
   )
 }
