@@ -9,13 +9,16 @@ import InputText from '../../../common/Inputs/InputText.tsx'
 import { Button } from '../../../common/Buttons/Button.tsx'
 import { Stack } from '@mantine/core'
 import CarImageDropzone from '../CarImageDropzone.tsx'
+import { useGetCars } from '../../../../app/api/user/cars/getCars.tsx'
 
 const CarsAddFormModal = () => {
+  const { refetch } = useGetCars()
+
   const { inputsNames, handleSubmit, methods } = useFormMutation<TPostCarFormFields, unknown>(
     TPostCarSchema,
     postSignIn,
     {
-      onSuccess: () => console.log('hej'),
+      onSuccess: () => refetch && refetch(),
     },
   )
   const setFormPhoto = (photoId: string) => {
