@@ -67,14 +67,21 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const CarCard = (car: TCar) => {
+type CarCardProps = {
+  car: TCar
+  refetch: () => void
+}
+const CarCard = ({ car, refetch }: CarCardProps) => {
   const [openedReservationModal, setOpenedReservationModal] = useState(false)
   const [openedDeleteModal, setOpenedDeleteModal] = useState(false)
   const { data } = useGetDocument(car.carPhotoId)
   const { classes } = useStyles()
 
   const { mutateAsync: deleteMutation } = useMutation(deleteCar, {
-    onSuccess: () => setOpenedDeleteModal(false),
+    onSuccess: () => {
+      refetch && refetch()
+      setOpenedDeleteModal(false)
+    },
   })
 
   return (
@@ -126,7 +133,6 @@ const CarCard = (car: TCar) => {
       >
         <CarAddReservation id={car.id} />
       </ModalWithTitle>
-
       <DeleteModal
         onConfirm={() => deleteMutation(car.id)}
         opened={openedDeleteModal}

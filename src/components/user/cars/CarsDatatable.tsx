@@ -3,7 +3,7 @@ import CarCard from './CarCard.tsx'
 import { SimpleGrid } from '@mantine/core'
 
 const CarsDatatable = () => {
-  const { data } = useGetCars()
+  const { data, refetch } = useGetCars()
 
   return (
     <SimpleGrid
@@ -16,7 +16,7 @@ const CarsDatatable = () => {
         { maxWidth: '36rem', cols: 1, spacing: 'sm' },
       ]}
     >
-      {data?.map((item) => <CarCard key={item.id} {...item} />)}
+      {data?.map((item) => <CarCard key={item.id} car={{ ...item }} refetch={refetch} />)}
     </SimpleGrid>
   )
 }

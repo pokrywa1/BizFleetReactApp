@@ -54,10 +54,10 @@ const CarImageDropzone = ({ setFormPhoto }: CarImageDropzoneProps) => {
 
             <div>
               <Text size="xl" inline>
-                Drag images here or click to select files
+                Przeciągnij zdjęcie lub kliknij, aby wybrać
               </Text>
               <Text size="sm" color="dimmed" inline mt={7}>
-                Attach as many files as you like, each file should not exceed 5mb
+                Maksymalny rozmiar zdjęcia wynosi 5mb
               </Text>
             </div>
           </Group>
