@@ -1,7 +1,24 @@
-import { Card, Image, Text, Group, createStyles, Button, rem, Stack, Modal } from '@mantine/core'
+import {
+  Card,
+  Image,
+  Text,
+  Group,
+  createStyles,
+  Button,
+  rem,
+  Stack,
+  Modal,
+  ActionIcon,
+  Menu,
+} from '@mantine/core'
 import { useGetDocument } from '../../../app/api/user/documents/getDocument.tsx'
 import { useState } from 'react'
 import CarAddReservation from './modals/CarAddReservation.tsx'
+import { useMutation } from 'react-query'
+import { deleteCar } from '../../../app/api/user/cars/deleteCar.tsx'
+import { TCar } from '../../../app/api/user/cars/getCars.tsx'
+import { AiFillSetting } from 'react-icons/ai'
+import { BsFillTrashFill } from 'react-icons/bs'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -12,9 +29,19 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
     borderBottom: `${rem(1)} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
+  },
+
+  item: {
+    color: 'slategray',
+  },
+  actionIconWrapper: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 
   label: {
@@ -39,42 +66,53 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-type CarCardProps = {
-  id: string
-  imageId: string | null
-  model: string
-  year: number
-  plate: string
-}
-const CarCard = ({ id, plate, year, imageId, model }: CarCardProps) => {
+const CarCard = (car: TCar) => {
   const [openedReservationModal, setOpenedReservationModal] = useState(false)
-  const { data } = useGetDocument(imageId)
+  const [openedDeleteModal, setOpenedDeleteModal] = useState(false)
+  const { data } = useGetDocument(car.carPhotoId)
   const { classes } = useStyles()
+
+  const { mutateAsync: deleteMutation } = useMutation(deleteCar, {
+    onSuccess: () => setOpenedDeleteModal(false),
+  })
 
   return (
     <>
       <Card withBorder radius="md" className={classes.card}>
         <Card.Section className={classes.imageSection}>
           <Image src={data?.url} alt="Tesla Model S" />
+          <Menu shadow="md" width={200} classNames={classes}>
+            <Menu.Target>
+              <ActionIcon className={classes.actionIconWrapper}>
+                <AiFillSetting />
+              </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item icon={<AiFillSetting />}>Edycja</Menu.Item>
+              <Menu.Item icon={<BsFillTrashFill />} onClick={() => setOpenedDeleteModal(true)}>
+                Usuń
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </Card.Section>
 
         <Stack my="xs" spacing={'xs'}>
           <Group position={'apart'}>
             <Text fw={500}>Marka</Text>
-            <Text fw={400}>{model}</Text>
+            <Text fw={400}>{car.model}</Text>
           </Group>
           <Group position={'apart'}>
             <Text fw={500}>Rocznik</Text>
-            <Text fw={400}>{year}</Text>
+            <Text fw={400}>{car.year}</Text>
           </Group>
           <Group position={'apart'}>
             <Text fw={500}>Rejestracja</Text>
-            <Text fw={400}>{plate}</Text>
+            <Text fw={400}>{car.licensePlate}</Text>
           </Group>
         </Stack>
 
         <Card.Section className={classes.section}>
-          <Button onClick={() => setOpenedReservationModal(true)} fullWidth style={{ flex: 1 }}>
+          <Button onClick={() => setOpenedReservationModal(true)} fullWidth>
             Rezerwuj
           </Button>
         </Card.Section>
@@ -84,7 +122,21 @@ const CarCard = ({ id, plate, year, imageId, model }: CarCardProps) => {
         onClose={() => setOpenedReservationModal(false)}
         title={'Rezerwacja samochodu'}
       >
-        <CarAddReservation id={id} />
+        <CarAddReservation id={car.id} />
+      </Modal>
+      <Modal
+        opened={openedDeleteModal}
+        onClose={() => setOpenedDeleteModal(false)}
+        title={'Usuwanie samochodu'}
+      >
+        <Group spacing={'xs'} grow>
+          <Button variant={'outline'} onClick={() => setOpenedDeleteModal(false)}>
+            Anuluj
+          </Button>
+          <Button color={'red'} onClick={() => deleteMutation(car.id)}>
+            Usuń
+          </Button>
+        </Group>
       </Modal>
     </>
   )

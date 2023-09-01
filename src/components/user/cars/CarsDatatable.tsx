@@ -16,16 +16,7 @@ const CarsDatatable = () => {
         { maxWidth: '36rem', cols: 1, spacing: 'sm' },
       ]}
     >
-      {data?.map((item) => (
-        <CarCard
-          id={item.id}
-          year={item.year}
-          imageId={item.carPhotoId}
-          model={item.model}
-          plate={item.licensePlate}
-          key={item.id}
-        />
-      ))}
+      {data?.map((item) => <CarCard key={item.id} {...item} />)}
     </SimpleGrid>
   )
 }
