@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 import useFormMutation from '../../../../app/hook/useFormMutation.tsx'
 import {
-  postSignIn,
+  postCar,
   TPostCarFormFields,
   TPostCarSchema,
 } from '../../../../app/api/user/cars/postCar.tsx'
@@ -16,7 +16,7 @@ const CarsAddFormModal = () => {
 
   const { inputsNames, handleSubmit, methods } = useFormMutation<TPostCarFormFields, unknown>(
     TPostCarSchema,
-    postSignIn,
+    postCar,
     {
       onSuccess: () => refetch && refetch(),
     },

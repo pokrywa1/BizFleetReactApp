@@ -11,12 +11,12 @@ export type TPostCarFormFields = {
 
 export const TPostCarSchema = yup.object().shape({
   model: yup.string().nullable().required('Model jest wymagany'),
-  licensePlate: yup.string().nullable().required('Rejestracja jest wymagan'),
+  licensePlate: yup.string().nullable().required('Rejestracja jest wymagane'),
   year: yup.number().nullable().required('Rocznik jest wymgany'),
   carPhotoId: yup.string().nullable(),
 })
 
-export const postSignIn = (data: TPostCarFormFields): Promise<AxiosResponse<unknown>['data']> => {
+export const postCar = (data: TPostCarFormFields): Promise<AxiosResponse<unknown>['data']> => {
   return axios({
     method: 'POST',
     data: data,

@@ -20,6 +20,7 @@ import { AiFillSetting } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs'
 import { ModalWithTitle } from '../../common/modals/Modal.tsx'
 import DeleteModal from '../../common/modals/DeleteModal.tsx'
+import CarEditFormModal from './modals/CarEditFormModal.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -74,6 +75,7 @@ type CarCardProps = {
 const CarCard = ({ car, refetch }: CarCardProps) => {
   const [openedReservationModal, setOpenedReservationModal] = useState(false)
   const [openedDeleteModal, setOpenedDeleteModal] = useState(false)
+  const [openedEditModal, setOpenedEditModal] = useState(false)
   const { data } = useGetDocument(car.carPhotoId)
   const { classes } = useStyles()
 
@@ -96,7 +98,9 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item icon={<AiFillSetting />}>Edycja</Menu.Item>
+              <Menu.Item icon={<AiFillSetting />} onClick={() => setOpenedEditModal(true)}>
+                Edycja
+              </Menu.Item>
               <Menu.Item icon={<BsFillTrashFill />} onClick={() => setOpenedDeleteModal(true)}>
                 Usuń
               </Menu.Item>
@@ -132,6 +136,13 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
         subtext={'Wybierz okres i zatwierdź rezerwacje'}
       >
         <CarAddReservation id={car.id} />
+      </ModalWithTitle>
+      <ModalWithTitle
+        opened={openedEditModal}
+        onClose={() => setOpenedEditModal(false)}
+        title={'Edycja samochodu'}
+      >
+        <CarEditFormModal {...car} />
       </ModalWithTitle>
       <DeleteModal
         onConfirm={() => deleteMutation(car.id)}
