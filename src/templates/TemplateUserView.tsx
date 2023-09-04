@@ -8,6 +8,7 @@ const useStyle = createStyles((theme) => ({
   sideBarContainer: {
     display: 'block',
     position: 'fixed',
+    zIndex: 1000,
     top: 0,
     bottom: 0,
     left: 0,
@@ -16,11 +17,14 @@ const useStyle = createStyles((theme) => ({
     display: 'block',
     paddingLeft: NAVBAR_WIDTH + 20,
     paddingRight: 20,
-    marginTop: theme.spacing.xl,
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
     maxWidth: '1440px',
     marginRight: 'auto',
     marginLeft: 'auto',
     boxSizing: 'border-box',
+    backgroundColor: '#F8F9FA',
+    minHeight: `calc(${theme.spacing.xl} - 100vh)`, // Użyj calc do ustawienia minimalnej wysokości
   },
 }))
 export function TemplateUserView() {
