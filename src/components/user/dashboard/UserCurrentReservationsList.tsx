@@ -1,6 +1,6 @@
 import { TReservation } from '../../../app/api/user/reservations/getReservations.ts'
 import UserCurrentReservationCard from './UserCurrentReservationCard.tsx'
-import { SimpleGrid, Title } from '@mantine/core'
+import { SimpleGrid } from '@mantine/core'
 
 type UserCurrentReservationsList = {
   reservations: TReservation[]
@@ -8,9 +8,6 @@ type UserCurrentReservationsList = {
 const UserCurrentReservationsList = ({ reservations }: UserCurrentReservationsList) => {
   return (
     <>
-      <Title color={'dark'} order={2}>
-        Aktualne wypożyczenie
-      </Title>
       <SimpleGrid
         mt={'md'}
         cols={4}
@@ -29,6 +26,7 @@ const UserCurrentReservationsList = ({ reservations }: UserCurrentReservationsLi
             model={item.car.model}
             startTime={item.startTime}
             year={item.car.year}
+            url={item.car.carPhotoId}
           />
         ))}
       </SimpleGrid>

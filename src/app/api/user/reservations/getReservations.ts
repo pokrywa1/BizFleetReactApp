@@ -12,6 +12,7 @@ type TCar = {
   licensePlate: string
   model: string
   year: string
+  carPhotoId: string
 }
 
 type ReservationStatus = {

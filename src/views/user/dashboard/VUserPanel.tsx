@@ -1,14 +1,21 @@
-import { useGetReservations } from '../../../app/api/user/reservations/getReservations.ts'
+import {
+  TReservation,
+  useGetReservations,
+} from '../../../app/api/user/reservations/getReservations.ts'
 import UserCurrentReservationsList from '../../../components/user/dashboard/UserCurrentReservationsList.tsx'
-import { Text } from '@mantine/core'
+import Title from '../../../components/common/Typography/Title.tsx'
+import { QueryWrapper } from '../../../app/Query/Query.tsx'
 
 const VUserPanel = () => {
-  const data = useGetReservations()
+  const queryData = useGetReservations()
 
-  return data.isSuccess && data.data.length > 0 ? (
-    <UserCurrentReservationsList reservations={data.data} />
-  ) : (
-    <Text>Brak Aktualnie wypożyczonych samochodów</Text>
+  return (
+    <>
+      <Title order={2}>Aktualne wypożyczenia</Title>
+      <QueryWrapper query={queryData}>
+        {(data: TReservation[]) => <UserCurrentReservationsList reservations={data} />}
+      </QueryWrapper>
+    </>
   )
 }
 
