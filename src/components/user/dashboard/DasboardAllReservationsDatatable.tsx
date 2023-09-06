@@ -18,23 +18,28 @@ const headers: TTableHeader = [
     name: 'Nazwisko',
   },
   {
-    name: 'Nazwisko',
+    name: 'Tytuł',
+  },
+  {
+    name: 'Samochód',
   },
 ]
 const DasboardAllReservationsDatatable = ({
   reservations,
 }: DasboardAllReservationsDatatableProps) => {
   return (
-    <Table.Container columns={headers} importantIndex={[1, 2]}>
+    <Table.Container columns={headers} importantIndex={[0, 1]}>
       <Table.Row>
-        <Text>hej</Text>
-        <Text>hej</Text>
-        <Text>hej</Text>
+        <Text>Ola</Text>
+        <Text>Olowska</Text>
+        <Text>Pracownik</Text>
+        <Text>Opel</Text>
       </Table.Row>
       <Table.Row>
-        <Text>hej</Text>
-        <Text>hej</Text>
-        <Text>hej</Text>
+        <Text>Hubert</Text>
+        <Text>Hubertowski</Text>
+        <Text>Admin</Text>
+        <Text>Ford</Text>
       </Table.Row>
     </Table.Container>
   )

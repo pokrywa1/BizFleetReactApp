@@ -1,4 +1,4 @@
-import { createStyles, Group, Text } from '@mantine/core'
+import { createStyles } from '@mantine/core'
 import { TTableHeader } from '../../user/dashboard/DasboardAllReservationsDatatable.tsx'
 import { createContext, useContext } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
@@ -91,15 +91,13 @@ const _TableHead = () => {
               {item.name}
             </th>
           ))}
-        {importantIndex && isMobile && (
-          <th className={classes.th} scope="col">
-            <Group spacing={'md'} noWrap>
-              {importantIndex.map((index) => (
-                <Text key={index}>{columns[index].name}</Text>
-              ))}
-            </Group>
-          </th>
-        )}
+        {importantIndex &&
+          isMobile &&
+          importantIndex.map((index) => (
+            <th className={classes.th} key={index} scope="col">
+              {columns[index].name}
+            </th>
+          ))}
         {importantIndex && isMobile && <th className={classes.th} scope="col"></th>}
       </tr>
     </thead>

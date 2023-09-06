@@ -1,24 +1,41 @@
 import React from 'react'
-import { Button, Collapse, createStyles, Flex, Group, Text } from '@mantine/core'
+import { ActionIcon, Collapse, createStyles, Divider, Group, Stack, Text } from '@mantine/core'
 import { useTableContext } from './Container.tsx'
 import { useDisclosure } from '@mantine/hooks'
+import { AiOutlineArrowDown } from 'react-icons/ai'
 
 type TableRowProps = {
   children: React.ReactNode | React.ReactNode[]
 }
 
-const useStyle = createStyles((theme) => ({
+const useStyle = createStyles(() => ({
   tr: {
     backgroundColor: 'white',
   },
   td: {},
+  actionIcon: {
+    transitionDuration: '200ms',
+    transitionProperty: 'all',
+    margin: '0',
+  },
+  opened: {
+    rotate: '180deg',
+  },
 }))
 const _TableRow = ({ children: _children }: TableRowProps) => {
   const [opened, { toggle }] = useDisclosure(false)
-  const { classes } = useStyle()
-  const { importantIndex, isMobile } = useTableContext()
-
+  const { classes, cx } = useStyle()
+  const { importantIndex, isMobile, columns } = useTableContext()
   const children = React.Children.toArray(_children)
+
+  const complementIndexes = []
+
+  for (let i = 0; i < children.length; i++) {
+    if (!importantIndex?.includes(i)) {
+      complementIndexes.push(i)
+    }
+  }
+
   return (
     <>
       <tr className={classes.tr}>
@@ -28,30 +45,46 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
               {item}
             </td>
           ))}
+        {importantIndex &&
+          isMobile &&
+          importantIndex.map((index) => (
+            <td key={index} className={classes.td}>
+              {children[index]}
+            </td>
+          ))}
         {importantIndex && isMobile && (
-          <td className={classes.td} colSpan={importantIndex.length + 1}>
-            <Group position={'apart'}>
-              <Group spacing={'xl'} noWrap>
-                {importantIndex.map((item) => children[item])}
-              </Group>
-              <Button onClick={toggle} />
-            </Group>
-            <Collapse in={opened}>
-              <Text>fbdbdbb</Text>
-              <Text>fbdbdbb</Text>
-            </Collapse>
+          <td className={classes.td}>
+            <ActionIcon onClick={toggle} variant="outline" m={0} color={'blue'}>
+              <div className={cx(classes.actionIcon, { [classes.opened]: opened })}>
+                <AiOutlineArrowDown />
+              </div>
+            </ActionIcon>
           </td>
         )}
-        {/*{importantIndex && isMobile && <td className={classes.td}></td>}*/}
-        {/*{importantIndex && isMobile && opened && (*/}
-        {/*  <Collapse in={opened}>*/}
-        {/*    <Text>fbdbdbb</Text>*/}
-        {/*    <Text>fbdbdbb</Text>*/}
-        {/*  </Collapse>*/}
-        {/*)}*/}
       </tr>
+      {importantIndex && isMobile && opened && (
+        <tr>
+          <td colSpan={importantIndex.length + 1}>
+            <Collapse in={opened}>
+              <Stack>
+                {complementIndexes.map((index, i) => (
+                  <>
+                    <Group position={'apart'} key={index}>
+                      <Text size={'xs'} color={'gray.6'} key={Number(index)}>
+                        {columns[index].name}
+                      </Text>
+                      <Text key={Number(index)}>{children[index]}</Text>
+                    </Group>
+                    {i + 1 < complementIndexes.length && <Divider color={'gray.2'} />}
+                  </>
+                ))}
+              </Stack>
+            </Collapse>
+          </td>
+        </tr>
+      )}
     </>
   )
 }
-
+// 0.0625rem solid #dee2e6
 export default _TableRow
