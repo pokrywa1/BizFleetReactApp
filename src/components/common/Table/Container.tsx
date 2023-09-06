@@ -1,4 +1,4 @@
-import { createStyles, useMantineTheme } from '@mantine/core'
+import { createStyles, Group, Text } from '@mantine/core'
 import { TTableHeader } from '../../user/dashboard/DasboardAllReservationsDatatable.tsx'
 import { createContext, useContext } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
@@ -69,7 +69,7 @@ const _TableContainer = ({ columns, importantIndex, children }: TableContainerPr
       <div className={classes.container}>
         <table className={classes.table}>
           <_TableHead />
-          <tbody>{children}</tbody>
+          <_TableBody>{children}</_TableBody>
         </table>
       </div>
     </TableContext.Provider>
@@ -82,29 +82,33 @@ const _TableHead = () => {
   const { classes } = useStyle()
 
   const { columns, importantIndex, isMobile } = useTableContext()
-  if (!isMobile) {
-    return (
-      <thead>
-        <tr>
-          {columns.map((item, index) => (
+  return (
+    <thead>
+      <tr>
+        {!isMobile &&
+          columns.map((item, index) => (
             <th className={classes.th} key={index} scope="col">
               {item.name}
             </th>
           ))}
-        </tr>
-      </thead>
-    )
-  } else if (importantIndex && isMobile) {
-    return (
-      <thead>
-        <tr>
-          {importantIndex.map((index) => (
-            <th className={classes.th} key={index} scope="col">
-              {columns[index].name}
-            </th>
-          ))}
-        </tr>
-      </thead>
-    )
-  }
+        {importantIndex && isMobile && (
+          <th className={classes.th} scope="col">
+            <Group spacing={'md'} noWrap>
+              {importantIndex.map((index) => (
+                <Text key={index}>{columns[index].name}</Text>
+              ))}
+            </Group>
+          </th>
+        )}
+        {importantIndex && isMobile && <th className={classes.th} scope="col"></th>}
+      </tr>
+    </thead>
+  )
+}
+
+type TableBodyProps = {
+  children: React.ReactNode | React.ReactNode[]
+}
+const _TableBody = ({ children }: TableBodyProps) => {
+  return <tbody>{children}</tbody>
 }
