@@ -1,6 +1,7 @@
 import { TReservation } from '../../../app/api/user/reservations/getReservations.ts'
 import { Table } from '../../common/Table/Table.tsx'
-import { Text } from '@mantine/core'
+import { Badge, Text } from '@mantine/core'
+import * as dayjs from 'dayjs'
 
 type DasboardAllReservationsDatatableProps = {
   reservations: TReservation[]
@@ -12,35 +13,33 @@ export type TTableHeader = {
 
 const headers: TTableHeader = [
   {
-    name: 'Imie',
-  },
-  {
-    name: 'Nazwisko',
-  },
-  {
-    name: 'Tytuł',
+    name: 'Pracownik',
   },
   {
     name: 'Samochód',
   },
+  {
+    name: 'Status',
+  },
+  {
+    name: 'Od',
+  },
+  { name: 'Do' },
 ]
 const DasboardAllReservationsDatatable = ({
   reservations,
 }: DasboardAllReservationsDatatableProps) => {
   return (
     <Table.Container columns={headers} importantIndex={[0]}>
-      <Table.Row>
-        <Text>Ola</Text>
-        <Text>Olowska</Text>
-        <Text>Pracownik</Text>
-        <Text>Opel</Text>
-      </Table.Row>
-      <Table.Row>
-        <Text>Hubert</Text>
-        <Text>Hubertowski</Text>
-        <Text>Admin</Text>
-        <Text>Ford</Text>
-      </Table.Row>
+      {reservations.map((item) => (
+        <Table.Row key={item.id}>
+          <Text>{item.user.username}</Text>
+          <Text>{item.car.model}</Text>
+          <Badge radius={'sm'}>{item.reservationStatus.name}</Badge>
+          <Text>{dayjs(item.startTime).format('DD-MM-YYYY')}</Text>
+          <Text>{dayjs(item.endTime).format('DD-MM-YYYY')}</Text>
+        </Table.Row>
+      ))}
     </Table.Container>
   )
 }
