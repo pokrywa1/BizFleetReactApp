@@ -24,7 +24,7 @@ const useStyle = createStyles((theme) => ({
     marginLeft: 'auto',
     boxSizing: 'border-box',
     backgroundColor: '#F8F9FA',
-    minHeight: `calc(${theme.spacing.xl} - 100vh)`, // Użyj calc do ustawienia minimalnej wysokości
+    minHeight: `calc(100vh - ${theme.spacing.xl})`, // Użyj calc do ustawienia minimalnej wysokości
   },
 }))
 export function TemplateUserView() {
