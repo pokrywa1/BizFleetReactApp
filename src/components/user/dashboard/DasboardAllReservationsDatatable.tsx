@@ -28,7 +28,7 @@ const DasboardAllReservationsDatatable = ({
   reservations,
 }: DasboardAllReservationsDatatableProps) => {
   return (
-    <Table.Container columns={headers} importantIndex={[0, 1]}>
+    <Table.Container columns={headers} importantIndex={[0]}>
       <Table.Row>
         <Text>Ola</Text>
         <Text>Olowska</Text>

@@ -12,7 +12,13 @@ const useStyle = createStyles(() => ({
   tr: {
     backgroundColor: 'white',
   },
-  td: {},
+  tdControls: {
+    textAlign: 'right',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: '0.5rem',
+  },
   actionIcon: {
     transitionDuration: '200ms',
     transitionProperty: 'all',
@@ -39,22 +45,13 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
   return (
     <>
       <tr className={classes.tr}>
-        {!isMobile &&
-          children.map((item, index) => (
-            <td className={classes.td} key={index}>
-              {item}
-            </td>
-          ))}
+        {!isMobile && children.map((item, index) => <td key={index}>{item}</td>)}
         {importantIndex &&
           isMobile &&
-          importantIndex.map((index) => (
-            <td key={index} className={classes.td}>
-              {children[index]}
-            </td>
-          ))}
+          importantIndex.map((index) => <td key={index}>{children[index]}</td>)}
         {importantIndex && isMobile && (
-          <td className={classes.td}>
-            <ActionIcon onClick={toggle} variant="outline" m={0} color={'blue'}>
+          <td className={classes.tdControls}>
+            <ActionIcon onClick={toggle} variant="outline" mr={0} color={'blue'}>
               <div className={cx(classes.actionIcon, { [classes.opened]: opened })}>
                 <AiOutlineArrowDown />
               </div>

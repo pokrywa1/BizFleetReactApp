@@ -28,6 +28,9 @@ const useStyle = createStyles((theme) => ({
       borderTopRightRadius: 10,
       borderBottomRightRadius: 10,
     },
+    '& > tbody > tr > td > button': {
+      textAlign: 'right',
+    },
   },
   th: {
     textAlign: 'start',
