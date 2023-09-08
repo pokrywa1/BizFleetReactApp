@@ -33,7 +33,6 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
   const { classes, cx } = useStyle()
   const { importantIndex, isMobile, columns } = useTableContext()
   const children = React.Children.toArray(_children)
-
   const complementIndexes = []
 
   for (let i = 0; i < children.length; i++) {
@@ -45,7 +44,10 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
   return (
     <>
       <tr className={classes.tr}>
-        {!isMobile && children.map((item, index) => <td key={index}>{item}</td>)}
+        {!isMobile &&
+          children.map((item, index) => {
+            return <td key={index}>{item}</td>
+          })}
         {importantIndex &&
           isMobile &&
           importantIndex.map((index) => <td key={index}>{children[index]}</td>)}
@@ -66,12 +68,17 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
               <Stack>
                 {complementIndexes.map((index, i) => (
                   <>
-                    <Group position={'apart'} key={index}>
-                      <Text size={'xs'} color={'gray.6'} key={Number(index)}>
-                        {columns[index].name}
-                      </Text>
-                      <Text key={Number(index)}>{children[index]}</Text>
-                    </Group>
+                    {i + 1 < complementIndexes.length ? (
+                      <Group position={'apart'} key={i}>
+                        <Text size={'xs'} color={'gray.6'} key={Number(index)}>
+                          {columns[index].name}
+                        </Text>
+                        <Text>{children[index]}</Text>
+                      </Group>
+                    ) : (
+                      children[index]
+                    )}
+
                     {i + 1 < complementIndexes.length && <Divider color={'gray.2'} />}
                   </>
                 ))}

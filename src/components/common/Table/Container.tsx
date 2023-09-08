@@ -85,15 +85,19 @@ const _TableHead = () => {
   const { classes } = useStyle()
 
   const { columns, importantIndex, isMobile } = useTableContext()
+  console.log(columns)
   return (
     <thead>
       <tr>
         {!isMobile &&
-          columns.map((item, index) => (
-            <th className={classes.th} key={index} scope="col">
-              {item.name}
-            </th>
-          ))}
+          columns.map((item, index) => {
+            console.log(index)
+            return (
+              <th className={classes.th} key={index} scope="col">
+                {item.name ?? ''}
+              </th>
+            )
+          })}
         {importantIndex &&
           isMobile &&
           importantIndex.map((index) => (
