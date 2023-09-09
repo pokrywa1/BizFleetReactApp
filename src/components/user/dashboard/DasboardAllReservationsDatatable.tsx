@@ -2,7 +2,9 @@ import { TReservation } from '../../../app/api/user/reservations/getReservations
 import { Table } from '../../common/Table/Table.tsx'
 import { Badge, Text } from '@mantine/core'
 import * as dayjs from 'dayjs'
-import { Button } from '../../common/Buttons/Button.tsx'
+import { BsArchive } from 'react-icons/bs'
+import { useMutation } from 'react-query'
+import { putReservationFinish } from '../../../app/api/user/reservations/putReservationFinish.ts'
 
 type DasboardAllReservationsDatatableProps = {
   reservations: TReservation[]
@@ -31,6 +33,11 @@ const headers: TTableHeader = [
 const DasboardAllReservationsDatatable = ({
   reservations,
 }: DasboardAllReservationsDatatableProps) => {
+  const finishReservationMutation = useMutation(putReservationFinish, {
+    onSuccess: () => console.log('Poszło'),
+    onError: () => console.log('Jakis błąd'),
+  })
+
   return (
     <Table.Container columns={headers} importantIndex={[0]}>
       {reservations.map((item) => (
@@ -41,8 +48,11 @@ const DasboardAllReservationsDatatable = ({
           <Text>{dayjs(item.startTime).format('DD-MM-YYYY')}</Text>
           <Text>{dayjs(item.endTime).format('DD-MM-YYYY')}</Text>
           <Table.Controls>
-            <Button>Hej</Button>
-            <Button>Action</Button>
+            <Table.Button.Pure
+              name={'Archiwizuj'}
+              onClick={() => finishReservationMutation.mutateAsync(item.id)}
+              icon={<BsArchive />}
+            />
           </Table.Controls>
         </Table.Row>
       ))}
