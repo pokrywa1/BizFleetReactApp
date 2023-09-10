@@ -21,6 +21,8 @@ import { BsFillTrashFill } from 'react-icons/bs'
 import { ModalWithTitle } from '../../common/modals/Modal.tsx'
 import DeleteModal from '../../common/modals/DeleteModal.tsx'
 import CarEditFormModal from './modals/CarEditFormModal.tsx'
+import { routes } from '../../../app/router'
+import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -111,7 +113,11 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
         <Stack my="xs" spacing={'xs'}>
           <Group position={'apart'}>
             <Text fw={500}>Marka</Text>
-            <Text fw={400}>{car.model}</Text>
+            <Text fw={400}>
+              {/*<Link to={routes['user-panel.car'](car.id)}/>*/}
+              {/*{car.model}*/}
+              <AnchorLink to={routes['user-panel.car'](car.id)}>{car.model}</AnchorLink>
+            </Text>
           </Group>
           <Group position={'apart'}>
             <Text fw={500}>Rocznik</Text>
