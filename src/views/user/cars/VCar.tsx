@@ -1,5 +1,7 @@
+import { CarBannerCard } from '../../../components/user/cars/CarBannerCard.tsx'
+
 const VCar = () => {
-  return <div>Informacje o osamochodzie</div>
+  return <CarBannerCard />
 }
 
 export default VCar
