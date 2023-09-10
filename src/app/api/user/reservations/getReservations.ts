@@ -15,8 +15,10 @@ type TCar = {
   carPhotoId: string
 }
 
+export type ReservationStatusCode = 'Cancelled' | 'Finished' | 'Reserved' | 'Active'
+
 type ReservationStatus = {
-  code: string
+  code: ReservationStatusCode
   name: string
 }
 

@@ -5,6 +5,7 @@ import * as dayjs from 'dayjs'
 import { BsArchive } from 'react-icons/bs'
 import { useMutation } from 'react-query'
 import { putReservationFinish } from '../../../app/api/user/reservations/putReservationFinish.ts'
+import { getBadgeColor } from '../../../app/utils/getBadgeColor.ts'
 
 type DasboardAllReservationsDatatableProps = {
   reservations: TReservation[]
@@ -44,7 +45,12 @@ const DasboardAllReservationsDatatable = ({
         <Table.Row key={item.id}>
           <Text>{item.user.username}</Text>
           <Text>{item.car.model}</Text>
-          <Badge radius={'sm'}>{item.reservationStatus.name}</Badge>
+          <Badge
+            radius={'sm'}
+            color={getBadgeColor('reservation-status', item.reservationStatus.code)}
+          >
+            {item.reservationStatus.name}
+          </Badge>
           <Text>{dayjs(item.startTime).format('DD-MM-YYYY')}</Text>
           <Text>{dayjs(item.endTime).format('DD-MM-YYYY')}</Text>
           <Table.Controls>
