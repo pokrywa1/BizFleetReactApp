@@ -12,7 +12,7 @@ const useStyle = createStyles((theme) => ({
     color: theme.colors.gray[8],
 
     borderCollapse: 'separate',
-    borderSpacing: `0px 10px`,
+    borderSpacing: `0 10px`,
     '& > thead > tr > th, & > tbody > tr > td': {
       backgroundColor: theme.colorScheme == 'light' ? theme.white : theme.colors.dark[6],
       padding: '15px 20px',

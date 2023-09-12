@@ -1,10 +1,20 @@
-import { TCar } from '../../../app/api/user/cars/getCars.tsx'
-import { Card, createStyles, Divider, Group, Image } from '@mantine/core'
-import Title from '../../common/Typography/Title.tsx'
-import { CarPropertyDetailsCard } from './CarPropertyDetailsCard.tsx'
-import { useGetDocument } from '../../../app/api/user/documents/getDocument.tsx'
+import { TCar } from '../../../../app/api/user/cars/getCars.tsx'
+import { Card, createStyles, Divider, Image, Stack } from '@mantine/core'
+import Title from '../../../common/Typography/Title.tsx'
+import { CarPropertyDetailsCard } from '../CarPropertyDetailsCard.tsx'
+import { useGetDocument } from '../../../../app/api/user/documents/getDocument.tsx'
+import { CarReservationHistoryDatatable } from './CarReservationHistoryDatatable.tsx'
 
 const useStyle = createStyles((theme) => ({
+  pageWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    gap: theme.spacing.xs,
+    [theme.fn.largerThan('xs')]: {
+      flexDirection: 'row',
+    },
+  },
   imageWrapper: {
     display: 'flex',
     justifyContent: 'center',
@@ -23,13 +33,11 @@ const useStyle = createStyles((theme) => ({
       paddingRight: '1rem',
     },
   },
-  bannerWrapper: {
+  essentialData: {
     display: 'flex',
     flexDirection: 'column',
+
     gap: theme.spacing.xs,
-    [theme.fn.largerThan('xs')]: {
-      flexDirection: 'row',
-    },
   },
   mainSection: {
     flex: 1,
@@ -44,21 +52,23 @@ export const CarBannerCard = ({ car }: CarBannerCardProps) => {
   const { classes } = useStyle()
   const { data: image } = useGetDocument(car.carPhotoId)
   return (
-    <Card>
-      <div className={classes.bannerWrapper}>
-        <Image classNames={classes} withPlaceholder src={image?.url} />
+    <div className={classes.pageWrapper}>
+      <div className={classes.essentialData}>
+        <Card>
+          <Image classNames={classes} withPlaceholder src={image?.url} />
+        </Card>
         {/*<Divider orientation={'vertical'}></Divider>*/}
-        <div className={classes.mainSection}>
+        <Card>
           <Title order={3}>{car.model}</Title>
           <Divider my={10} />
-
-          <Group spacing={'xs'}>
+          <Stack spacing={'xs'}>
             <CarPropertyDetailsCard name="Rocznik" value={car.year.toString()} />
             <CarPropertyDetailsCard name="Rejestracja" value={car.licensePlate} />
             <CarPropertyDetailsCard name="Rocznik" value={car.year.toString()} />
-          </Group>
-        </div>
+          </Stack>
+        </Card>
       </div>
-    </Card>
+      <CarReservationHistoryDatatable />
+    </div>
   )
 }

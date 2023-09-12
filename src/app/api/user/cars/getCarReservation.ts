@@ -19,7 +19,7 @@ type TCarReservation = {
 }
 
 export const getCarReservation = (
-  carId: string | null,
+  carId: string | null | undefined,
 ): Promise<AxiosResponse<TCarReservation[]>['data']> => {
   console.log('hello')
   if (!carId) new Error('getDocument: carId is undefined or null')
@@ -29,7 +29,7 @@ export const getCarReservation = (
   }).then(({ data }) => data)
 }
 
-export const useGetCarReservation = (carId: string | null) => {
+export const useGetCarReservation = (carId: string | null | undefined) => {
   return useQuery({
     queryKey: ['get.car.reservation', carId],
     queryFn: () => getCarReservation(carId),

@@ -1,4 +1,4 @@
-import { CarBannerCard } from '../../../components/user/cars/CarBannerCard.tsx'
+import { CarBannerCard } from '../../../components/user/cars/car/CarBannerCard.tsx'
 import { useParams } from 'react-router-dom'
 import { useGetCar } from '../../../app/api/user/cars/getCar.tsx'
 import { QueryWrapper } from '../../../app/Query/Query.tsx'
