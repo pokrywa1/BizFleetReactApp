@@ -107,6 +107,8 @@ const DasboardAllReservationsDatatable = ({
               opened={openedFinishModal}
               onClose={() => setOpenedFinishModal(false)}
               title={'Kończenie przejazdu'}
+              submitButtonText={'Zakończ'}
+              submitButtonColor={'green'}
             />
           </>
         ))}
