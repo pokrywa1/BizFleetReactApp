@@ -11,6 +11,9 @@ import { ImCancelCircle } from 'react-icons/im'
 import { toastError } from '../../../app/utils/toastError.ts'
 import { useState } from 'react'
 import DeleteModal from '../../common/modals/DeleteModal.tsx'
+import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
+import { routes } from '../../../app/router'
+import useUserStore from '../../../app/store/useUserStore.ts'
 
 type DasboardAllReservationsDatatableProps = {
   reservations: TReservation[]
@@ -39,6 +42,8 @@ const headers: TTableHeader = [
 const DasboardAllReservationsDatatable = ({
   reservations,
 }: DasboardAllReservationsDatatableProps) => {
+  const { user } = useUserStore()
+
   const finishReservationMutation = useMutation(putReservationFinish, {
     onSuccess: () => console.log('Poszło'),
     onError: () => toastError('Nie udało się zakończyć przejazdu'),
@@ -57,8 +62,15 @@ const DasboardAllReservationsDatatable = ({
         {reservations.map((item) => (
           <>
             <Table.Row key={item.id}>
-              <Text>{item.user.username}</Text>
-              <Text>{item.car.model}</Text>
+              {user ? (
+                <AnchorLink to={routes['user-panel.car'](item.userId)}>
+                  {item.user.username}
+                </AnchorLink>
+              ) : (
+                <Text>{item.user.username}</Text>
+              )}
+
+              <AnchorLink to={routes['user-panel.car'](item.carId)}>{item.car.model}</AnchorLink>
               <Badge
                 radius={'sm'}
                 color={getBadgeColor('reservation-status', item.reservationStatus.code)}
