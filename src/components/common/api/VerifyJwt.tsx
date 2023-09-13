@@ -6,11 +6,11 @@ type VerifyJwtProps = {
   children: React.ReactNode
 }
 const VerifyJwt = ({ children }: VerifyJwtProps) => {
-  const { clearUserAuth } = useUserStore()
+  const { clearUserAuth, setUserAuth } = useUserStore()
 
   useEffect(() => {
     getMe()
-      .then((data) => console.log(data))
+      .then((data) => setUserAuth(data))
       .catch(() => clearUserAuth())
   }, [])
   return <>{children}</>

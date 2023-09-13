@@ -25,7 +25,7 @@ const SignIn = () => {
   >(signInSchema, postSignIn, {
     onSuccess: (data) => {
       if (data.accessToken) {
-        setUserAuth(data.accessToken)
+        setUserAuth(data)
         setJwt(data.accessToken)
         navigate(routes['user-panel'])
       }

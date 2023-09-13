@@ -1,12 +1,16 @@
 import axios, { AxiosResponse } from 'axios'
+import { API_URL } from '../../../config/env.ts'
 
 export type TUserAccount = {
-  id: string
-  userName: string
-  fullName: string
+  accessToken: string | null
+  email: string | null
+  fullName: string | null
+  id: string | null
+  role: 'admin' | 'user'
+  username: string | null
 }
 export const getMe = (): Promise<AxiosResponse<TUserAccount>['data']> =>
   axios({
     method: 'GET',
-    url: 'http://localhost:5000/users/me',
+    url: `${API_URL}/users/me`,
   }).then(({ data }) => data)

@@ -12,6 +12,11 @@ export const signInSchema = yup.object().shape({
 })
 export type TSignInFormResponse = {
   accessToken: string | null
+  email: string | null
+  fullName: string | null
+  id: string | null
+  role: 'admin' | 'user'
+  username: string | null
 }
 export const postSignIn = (
   data: TSignInFormFields,

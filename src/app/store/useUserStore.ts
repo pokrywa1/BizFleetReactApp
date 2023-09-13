@@ -1,19 +1,20 @@
 import { create } from 'zustand'
-import { TSignInFormResponse } from '../api/public/auth/postSigIn.tsx'
 import { devtools, persist } from 'zustand/middleware'
+import { TUserAccount } from '../api/public/auth/getMe.ts'
 
 type TUserStore = {
-  setUserAuth: (accessToken: string) => void
+  user: TUserAccount | null
+  setUserAuth: (user: TUserAccount) => void
   clearUserAuth: () => void
-} & TSignInFormResponse
+}
 
 const useUserStore = create<TUserStore>()(
   devtools(
     persist(
       (set) => ({
-        accessToken: null,
-        setUserAuth: (accessToken: string) => set(() => ({ accessToken: accessToken })),
-        clearUserAuth: () => set(() => ({ accessToken: null })),
+        user: null,
+        setUserAuth: (user: TUserAccount) => set({ user }),
+        clearUserAuth: () => set(() => ({ user: null })),
       }),
       {
         name: 'auth-storage',

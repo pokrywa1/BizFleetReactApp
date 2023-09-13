@@ -8,8 +8,8 @@ type RequireAuthProps = {
   children: React.ReactNode
 }
 const RequireAuth = ({ children }: RequireAuthProps) => {
-  const { accessToken } = useUserStore()
-  if (accessToken) {
+  const { user } = useUserStore()
+  if (user) {
     return <Suspense fallback={<AppBarLoader />}>{children}</Suspense>
   }
   return <Navigate to={routes['auth.login']} />

@@ -21,7 +21,7 @@ const UserCurrentReservationsList = ({ reservations }: UserCurrentReservationsLi
         {reservations.map((item) => (
           <UserCurrentReservationCard
             key={item.car.id}
-            id={item.car.id}
+            id={item.id}
             endTime={item.endTime}
             model={item.car.model}
             startTime={item.startTime}
