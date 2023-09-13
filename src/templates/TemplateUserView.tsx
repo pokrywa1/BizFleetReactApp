@@ -8,7 +8,7 @@ const useStyle = createStyles((theme) => ({
   sideBarContainer: {
     display: 'block',
     position: 'fixed',
-    zIndex: 1000,
+    zIndex: 100,
     top: 0,
     bottom: 0,
     left: 0,
