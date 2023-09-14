@@ -25,7 +25,6 @@ const CarAddReservation = ({ id }: CarAddReservationProps) => {
 
     mutateAsync(formValue)
   }
-  console.log(data)
   return (
     <Stack>
       <DatePicker
@@ -42,12 +41,15 @@ const CarAddReservation = ({ id }: CarAddReservationProps) => {
               const currentDate = new Date(date)
 
               const today = new Date()
-              today.setHours(0, 0, 0, 0) // Ustawić na początek dnia
+              today.setHours(0, 0, 0, 0)
               if (currentDate < today) {
                 return true
               }
-
-              return currentDate <= endTime && currentDate >= startTime
+              return (
+                currentDate <= endTime &&
+                currentDate >= startTime &&
+                disabledDate.reservationStatus.code !== 'Cancelled'
+              )
             })) as boolean
         }
       />

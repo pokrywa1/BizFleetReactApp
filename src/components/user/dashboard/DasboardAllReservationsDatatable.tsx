@@ -95,17 +95,6 @@ const DasboardAllReservationsDatatable = ({
                     icon={<BsArchive />}
                   />
                 )}
-                <Table.Button.Pure
-                  name={'Zakończ'}
-                  onClick={() => setOpenedFinishModal(true)}
-                  icon={<BsArchive />}
-                />
-                <Table.Button.Pure
-                  name={'Anuluj'}
-                  onClick={() => setOpenedCancelModal(true)}
-                  color={'red'}
-                  icon={<ImCancelCircle />}
-                />
               </Table.Controls>
             </Table.Row>
             <DeleteModal
