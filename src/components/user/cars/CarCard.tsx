@@ -143,13 +143,13 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
       >
         <CarAddReservation id={car.id} onClose={() => setOpenedReservationModal(false)} />
       </ModalWithTitle>
-      <ModalWithTitle
-        opened={openedEditModal}
+
+      <CarEditFormModal
+        car={car}
         onClose={() => setOpenedEditModal(false)}
-        title={'Edycja samochodu'}
-      >
-        <CarEditFormModal {...car} />
-      </ModalWithTitle>
+        opened={openedEditModal}
+      />
+
       <ConfirmModal
         onConfirm={() => deleteMutation(car.id)}
         opened={openedDeleteModal}

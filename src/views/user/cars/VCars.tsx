@@ -20,7 +20,6 @@ const VCars = () => {
       <QueryWrapper query={queryData}>
         {(data: TCar[]) => <CarsDatatable cars={data} />}
       </QueryWrapper>
-
       <CarsAddFormModal opened={openedModal} onClose={() => setOpenedModal(false)} />
     </>
   )
