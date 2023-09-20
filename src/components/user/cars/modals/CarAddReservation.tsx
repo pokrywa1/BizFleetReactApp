@@ -11,11 +11,14 @@ import { useGetCarReservation } from '../../../../app/api/user/cars/getCarReserv
 
 type CarAddReservationProps = {
   id: string
+  onClose: () => void
 }
-const CarAddReservation = ({ id }: CarAddReservationProps) => {
+const CarAddReservation = ({ id, onClose }: CarAddReservationProps) => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null])
   const { data } = useGetCarReservation(id)
-  const { mutateAsync } = useMutation(postCarReservation)
+  const { mutateAsync } = useMutation(postCarReservation, {
+    onSuccess: () => onClose && onClose(),
+  })
   const handleReservationSubmit = () => {
     const formValue: TPostCarReservationFormFields = {
       endTime: value[1],

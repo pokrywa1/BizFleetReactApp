@@ -9,7 +9,7 @@ type TDeleteModalProps = {
   cancelButtonColor?: MantineColor
 } & TModalWithTitleProps
 
-const DeleteModal = ({
+const ConfirmModal = ({
   onConfirm,
   submitButtonText = 'Zatwierdź',
   cancelButtonText = 'Anuluj',
@@ -31,4 +31,4 @@ const DeleteModal = ({
   )
 }
 
-export default DeleteModal
+export default ConfirmModal

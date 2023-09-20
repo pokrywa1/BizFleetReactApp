@@ -19,7 +19,7 @@ import { TCar } from '../../../app/api/user/cars/getCars.tsx'
 import { AiFillSetting } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs'
 import { ModalWithTitle } from '../../common/modals/Modal.tsx'
-import DeleteModal from '../../common/modals/DeleteModal.tsx'
+import ConfirmModal from '../../common/modals/ConfirmModal.tsx'
 import CarEditFormModal from './modals/CarEditFormModal.tsx'
 import { routes } from '../../../app/router'
 import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
@@ -141,7 +141,7 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
         title={'Rezerwacja samochodu'}
         subtext={'Wybierz okres i zatwierdź rezerwacje'}
       >
-        <CarAddReservation id={car.id} />
+        <CarAddReservation id={car.id} onClose={() => setOpenedReservationModal(false)} />
       </ModalWithTitle>
       <ModalWithTitle
         opened={openedEditModal}
@@ -150,7 +150,7 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
       >
         <CarEditFormModal {...car} />
       </ModalWithTitle>
-      <DeleteModal
+      <ConfirmModal
         onConfirm={() => deleteMutation(car.id)}
         opened={openedDeleteModal}
         onClose={() => setOpenedDeleteModal(false)}

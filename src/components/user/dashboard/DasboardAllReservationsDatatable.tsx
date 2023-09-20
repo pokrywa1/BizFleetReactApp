@@ -10,7 +10,7 @@ import { putReservationCancel } from '../../../app/api/user/reservations/putRese
 import { ImCancelCircle } from 'react-icons/im'
 import { toastError } from '../../../app/utils/toastError.ts'
 import { useState } from 'react'
-import DeleteModal from '../../common/modals/DeleteModal.tsx'
+import ConfirmModal from '../../common/modals/ConfirmModal.tsx'
 import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
 import { routes } from '../../../app/router'
 import useUserStore from '../../../app/store/useUserStore.ts'
@@ -97,13 +97,13 @@ const DasboardAllReservationsDatatable = ({
                 )}
               </Table.Controls>
             </Table.Row>
-            <DeleteModal
+            <ConfirmModal
               onConfirm={() => cancelReservationMutation.mutateAsync(item.id)}
               opened={openedCancelModal}
               onClose={() => setOpenedCancelModal(false)}
               title={'Anulacja rezerwacji'}
             />
-            <DeleteModal
+            <ConfirmModal
               onConfirm={() => finishReservationMutation.mutateAsync(item.id)}
               opened={openedFinishModal}
               onClose={() => setOpenedFinishModal(false)}

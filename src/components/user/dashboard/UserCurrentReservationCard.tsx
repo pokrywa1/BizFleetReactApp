@@ -2,7 +2,7 @@ import { Badge, Card, createStyles, Divider, Group, Image, rem, Text } from '@ma
 import * as dayjs from 'dayjs'
 import { Button } from '../../common/Buttons/Button.tsx'
 import { useGetDocument } from '../../../app/api/user/documents/getDocument.tsx'
-import DeleteModal from '../../common/modals/DeleteModal.tsx'
+import ConfirmModal from '../../common/modals/ConfirmModal.tsx'
 import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { putReservationFinish } from '../../../app/api/user/reservations/putReservationFinish.ts'
@@ -117,7 +117,7 @@ const UserCurrentReservationCard = ({
           </Button>
         </Card.Section>
       </Card>
-      <DeleteModal
+      <ConfirmModal
         onConfirm={() => finishMutation.mutateAsync(id)}
         opened={openedModal}
         onClose={() => setOpenedModal(false)}
