@@ -1,6 +1,6 @@
 import CarsDatatable from '../../../components/user/cars/CarsDatatable.tsx'
 import Title from '../../../components/common/Typography/Title.tsx'
-import { Group, Modal } from '@mantine/core'
+import { Group } from '@mantine/core'
 import { useState } from 'react'
 import { Button } from '../../../components/common/Buttons/Button.tsx'
 import CarsAddFormModal from '../../../components/user/cars/modals/CarsAddFormModal.tsx'
@@ -21,14 +21,7 @@ const VCars = () => {
         {(data: TCar[]) => <CarsDatatable cars={data} />}
       </QueryWrapper>
 
-      <Modal
-        title={'Dodawanie samochodu'}
-        centered
-        opened={openedModal}
-        onClose={() => setOpenedModal(false)}
-      >
-        <CarsAddFormModal />
-      </Modal>
+      <CarsAddFormModal opened={openedModal} onClose={() => setOpenedModal(false)} />
     </>
   )
 }
