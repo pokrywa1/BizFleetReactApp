@@ -27,6 +27,8 @@ import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   imageSection: {
@@ -34,9 +36,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
+    height: '100%',
   },
 
   item: {
@@ -58,6 +58,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   section: {
+    marginTop: 'auto',
     padding: theme.spacing.xs,
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
@@ -109,27 +110,26 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
             </Menu.Dropdown>
           </Menu>
         </Card.Section>
-
-        <Stack my="xs" spacing={'xs'}>
-          <Group position={'apart'}>
-            <Text fw={500}>Marka</Text>
-            <Text fw={400}>
-              {/*<Link to={routes['user-panel.car'](car.id)}/>*/}
-              {/*{car.model}*/}
-              <AnchorLink to={routes['user-panel.car'](car.id)}>{car.model}</AnchorLink>
-            </Text>
-          </Group>
-          <Group position={'apart'}>
-            <Text fw={500}>Rocznik</Text>
-            <Text fw={400}>{car.year}</Text>
-          </Group>
-          <Group position={'apart'}>
-            <Text fw={500}>Rejestracja</Text>
-            <Text fw={400}>{car.licensePlate}</Text>
-          </Group>
-        </Stack>
-
         <Card.Section className={classes.section}>
+          <Stack my="xs" spacing={'xs'}>
+            <Group position={'apart'}>
+              <Text fw={500}>Marka</Text>
+              <Text fw={400}>
+                {/*<Link to={routes['user-panel.car'](car.id)}/>*/}
+                {/*{car.model}*/}
+                <AnchorLink to={routes['user-panel.car'](car.id)}>{car.model}</AnchorLink>
+              </Text>
+            </Group>
+            <Group position={'apart'}>
+              <Text fw={500}>Rocznik</Text>
+              <Text fw={400}>{car.year}</Text>
+            </Group>
+            <Group position={'apart'}>
+              <Text fw={500}>Rejestracja</Text>
+              <Text fw={400}>{car.licensePlate}</Text>
+            </Group>
+          </Stack>
+
           <Button onClick={() => setOpenedReservationModal(true)} fullWidth>
             Rezerwuj
           </Button>
