@@ -23,6 +23,7 @@ import ConfirmModal from '../../common/modals/ConfirmModal.tsx'
 import CarEditFormModal from './modals/CarEditFormModal.tsx'
 import { routes } from '../../../app/router'
 import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
+import { RequireAdmin } from '../../common/Access/RequireAdmin.tsx'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -94,21 +95,23 @@ const CarCard = ({ car, refetch }: CarCardProps) => {
       <Card withBorder radius="md" className={classes.card}>
         <Card.Section className={classes.imageSection}>
           <Image src={data?.url} alt="Tesla Model S" />
-          <Menu shadow="md" width={200} classNames={classes}>
-            <Menu.Target>
-              <ActionIcon className={classes.actionIconWrapper}>
-                <AiFillSetting />
-              </ActionIcon>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item icon={<AiFillSetting />} onClick={() => setOpenedEditModal(true)}>
-                Edycja
-              </Menu.Item>
-              <Menu.Item icon={<BsFillTrashFill />} onClick={() => setOpenedDeleteModal(true)}>
-                Usuń
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+          <RequireAdmin>
+            <Menu shadow="md" width={200} classNames={classes}>
+              <Menu.Target>
+                <ActionIcon className={classes.actionIconWrapper}>
+                  <AiFillSetting />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item icon={<AiFillSetting />} onClick={() => setOpenedEditModal(true)}>
+                  Edycja
+                </Menu.Item>
+                <Menu.Item icon={<BsFillTrashFill />} onClick={() => setOpenedDeleteModal(true)}>
+                  Usuń
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </RequireAdmin>
         </Card.Section>
         <Card.Section className={classes.section}>
           <Stack my="xs" spacing={'xs'}>
