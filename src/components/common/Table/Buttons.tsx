@@ -3,6 +3,8 @@ import { Button } from '../Buttons/Button.tsx'
 import { ActionIcon, MantineColor } from '@mantine/core'
 import { BsTrash } from 'react-icons/bs'
 import { useMutation } from 'react-query'
+import ConfirmModal from '../modals/ConfirmModal.tsx'
+import { useState } from 'react'
 
 type PureButtonProps = {
   name: string
@@ -38,21 +40,40 @@ const _DeleteButton = <TMutationArg,>({
   mutationFn,
   name = 'Usuń',
 }: DeleteButtonProps<TMutationArg>) => {
+  const [opened, setOpened] = useState(false)
+
+  const openModal = () => setOpened(true)
+  const closeModal = () => setOpened(false)
+
   const _deleteMutation = useMutation(mutationFn, {
-    onError: onError,
-    onSuccess: onSuccess,
+    onError: () => {
+      onError && onError()
+    },
+    onSuccess: () => {
+      closeModal()
+      onSuccess && onSuccess()
+    },
   })
-  const _onClick = () => _deleteMutation.mutateAsync(mutationArgs)
 
   const { isMobile } = useTableContext()
-  return isMobile ? (
-    <Button variant={'outline'} color={'red'} onClick={_onClick}>
-      {name}
-    </Button>
-  ) : (
-    <ActionIcon size={'lg'} radius={'md'} variant={'outline'} color={'red'} onClick={_onClick}>
-      <BsTrash />
-    </ActionIcon>
+  return (
+    <>
+      {isMobile ? (
+        <Button variant={'outline'} color={'red'} onClick={openModal}>
+          {name}
+        </Button>
+      ) : (
+        <ActionIcon size={'lg'} radius={'md'} variant={'outline'} color={'red'} onClick={openModal}>
+          <BsTrash />
+        </ActionIcon>
+      )}
+      <ConfirmModal
+        onConfirm={() => _deleteMutation.mutateAsync(mutationArgs)}
+        opened={opened}
+        onClose={closeModal}
+        title={'Anulacja rezerwacji'}
+      />
+    </>
   )
 }
 
