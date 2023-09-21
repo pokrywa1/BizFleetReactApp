@@ -1,13 +1,10 @@
-import { ModalWithTitle, TModalWithTitleProps } from './Modal.tsx'
-import { Button, Group, MantineColor } from '@mantine/core'
+import { ModalWithTitle, TModalWithTitleProps, TSharedModalProps } from './Modal.tsx'
+import { Button, Group } from '@mantine/core'
 
-type TDeleteModalProps = {
+export type TDeleteModalProps = {
   onConfirm: () => Promise<unknown>
-  submitButtonText?: string
-  cancelButtonText?: string
-  submitButtonColor?: MantineColor
-  cancelButtonColor?: MantineColor
-} & TModalWithTitleProps
+} & TModalWithTitleProps &
+  TSharedModalProps
 
 const ConfirmModal = ({
   onConfirm,

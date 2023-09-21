@@ -5,6 +5,8 @@ import { BsTrash } from 'react-icons/bs'
 import { useMutation } from 'react-query'
 import ConfirmModal from '../modals/ConfirmModal.tsx'
 import { useState } from 'react'
+import { IconType } from 'react-icons'
+import { TSharedModalProps } from '../modals/Modal.tsx'
 
 type PureButtonProps = {
   name: string
@@ -26,19 +28,27 @@ export const _PureButton = ({ name, icon, onClick, color = 'gray' }: PureButtonP
 }
 
 type DeleteButtonProps<TMutationArg> = {
-  name?: string
+  mobileText?: string
+  title?: string
   mutationFn: (args: TMutationArg) => Promise<unknown>
   mutationArgs: TMutationArg
   onSuccess?: () => void
   onError?: () => void
   onCancel?: () => void
+  buttonColor?: MantineColor
+  buttonIcon?: IconType
+  modalProps?: TSharedModalProps
 }
 const _DeleteButton = <TMutationArg,>({
   onError,
   onSuccess,
   mutationArgs,
   mutationFn,
-  name = 'Usuń',
+  mobileText = 'Usuń',
+  buttonColor = 'red',
+  buttonIcon: Icon = BsTrash,
+  modalProps,
+  title = 'Czy na pewno chcesz usunąć?',
 }: DeleteButtonProps<TMutationArg>) => {
   const [opened, setOpened] = useState(false)
 
@@ -59,19 +69,26 @@ const _DeleteButton = <TMutationArg,>({
   return (
     <>
       {isMobile ? (
-        <Button variant={'outline'} color={'red'} onClick={openModal}>
-          {name}
+        <Button variant={'outline'} color={buttonColor} onClick={openModal}>
+          {mobileText}
         </Button>
       ) : (
-        <ActionIcon size={'lg'} radius={'md'} variant={'outline'} color={'red'} onClick={openModal}>
-          <BsTrash />
+        <ActionIcon
+          size={'lg'}
+          radius={'md'}
+          variant={'outline'}
+          color={buttonColor}
+          onClick={openModal}
+        >
+          <Icon />
         </ActionIcon>
       )}
       <ConfirmModal
         onConfirm={() => _deleteMutation.mutateAsync(mutationArgs)}
         opened={opened}
         onClose={closeModal}
-        title={'Anulacja rezerwacji'}
+        title={title}
+        {...modalProps}
       />
     </>
   )

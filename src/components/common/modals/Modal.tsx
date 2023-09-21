@@ -1,7 +1,13 @@
-import { ModalProps } from '@mantine/core'
+import { MantineColor, ModalProps } from '@mantine/core'
 import { Modal as MantineModal } from '@mantine/core'
 import ModalHeader from './ModalHeader.tsx'
 
+export type TSharedModalProps = {
+  submitButtonText?: string
+  cancelButtonText?: string
+  submitButtonColor?: MantineColor
+  cancelButtonColor?: MantineColor
+}
 type TModalProps = ModalProps
 
 export const Modal = ({ children, ...props }: TModalProps) => {
