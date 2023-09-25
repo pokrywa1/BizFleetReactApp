@@ -1,6 +1,6 @@
 import { ReservationStatusCode } from '../api/user/reservations/getReservations.ts'
 import { MantineColor } from '@mantine/core'
-import { TOrganizationRole } from '../api/user/organization/organization.ts'
+import { TOrganizationRole } from '../api/user/organization/getOrganization.ts'
 
 export type EnumBadgeColorType = 'reservation-status' | 'organization-member'
 export const getBadgeColor = (enumType: EnumBadgeColorType, code: string): MantineColor => {

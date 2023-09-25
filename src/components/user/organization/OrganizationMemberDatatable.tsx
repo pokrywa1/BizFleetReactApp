@@ -1,4 +1,4 @@
-import { TOrganization } from '../../../app/api/user/organization/organization.ts'
+import { TOrganization } from '../../../app/api/user/organization/getOrganization.ts'
 import { TTableHeader } from '../dashboard/DasboardAllReservationsDatatable.tsx'
 import { Table } from '../../common/Table/Table.tsx'
 import { Badge, Text } from '@mantine/core'
