@@ -17,6 +17,7 @@ import { HEADER_HEIGHT, NAVBAR_WIDTH } from '../../templates/userTemplateConsts.
 import { IoCarSharp } from 'react-icons/io5'
 import { Link, LinkProps } from 'react-router-dom'
 import { routes } from '../../app/router'
+import { BsFillPeopleFill } from 'react-icons/bs'
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -67,6 +68,7 @@ function NavbarLink({ icon: Icon, label, active, onClick, ...props }: NavbarLink
 const mockdata = [
   { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel'] },
   { icon: IoCarSharp, label: 'Flota', to: routes['user-panel.cars'] },
+  { icon: BsFillPeopleFill, label: 'Pracownicy', to: routes['user-panel.members'] },
 ]
 const UserSideBar = () => {
   const [active, setActive] = useState(0)

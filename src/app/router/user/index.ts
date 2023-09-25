@@ -6,4 +6,7 @@ export const userRoutes = {
   //CARS
   'user-panel.cars': `${BASE_URL}/panel-uzytkownika/samochody`,
   'user-panel.car': (carId = ':carId') => `${BASE_URL}/panel-uzytkownika/samochody/${carId}`,
+
+  //organizations
+  'user-panel.members': `${BASE_URL}/panel-uzytkownika/pracownicy`,
 }
