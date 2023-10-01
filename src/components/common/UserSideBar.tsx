@@ -10,7 +10,7 @@ import {
   Group,
 } from '@mantine/core'
 import { BiLogOut, BiSolidDashboard } from 'react-icons/bi'
-import { AiFillCar } from 'react-icons/ai'
+import { AiFillCar, AiFillSetting } from 'react-icons/ai'
 
 import { IconType } from 'react-icons'
 import { HEADER_HEIGHT, NAVBAR_WIDTH } from '../../templates/userTemplateConsts.ts'
@@ -69,6 +69,7 @@ const mockdata = [
   { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel'] },
   { icon: IoCarSharp, label: 'Flota', to: routes['user-panel.cars'] },
   { icon: BsFillPeopleFill, label: 'Pracownicy', to: routes['user-panel.members'] },
+  { icon: AiFillSetting, label: 'Ustaweinia', to: routes['user-panel.settings'] },
 ]
 const UserSideBar = () => {
   const [active, setActive] = useState(0)

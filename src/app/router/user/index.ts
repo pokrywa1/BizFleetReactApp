@@ -9,4 +9,7 @@ export const userRoutes = {
 
   //organizations
   'user-panel.members': `${BASE_URL}/panel-uzytkownika/pracownicy`,
+
+  //settings
+  'user-panel.settings': `${BASE_URL}/panel-uzytkownika/ustawienia`,
 }
