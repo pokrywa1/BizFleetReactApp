@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Navbar,
   Tooltip,
@@ -15,7 +14,7 @@ import { AiFillCar, AiFillSetting } from 'react-icons/ai'
 import { IconType } from 'react-icons'
 import { HEADER_HEIGHT, NAVBAR_WIDTH } from '../../templates/userTemplateConsts.ts'
 import { IoCarSharp } from 'react-icons/io5'
-import { Link, LinkProps } from 'react-router-dom'
+import { LinkProps, NavLink } from 'react-router-dom'
 import { routes } from '../../app/router'
 import { BsFillPeopleFill } from 'react-icons/bs'
 
@@ -45,22 +44,23 @@ const useStyles = createStyles((theme) => ({
 type NavbarLinkProps = {
   icon: IconType
   label: string
-  active?: boolean
   onClick?(): void
 } & LinkProps
 
-function NavbarLink({ icon: Icon, label, active, onClick, ...props }: NavbarLinkProps) {
+function NavbarLink({ icon: Icon, label, onClick, ...props }: NavbarLinkProps) {
   const { classes, cx } = useStyles()
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }} zIndex={10000}>
-      <Link {...props}>
-        <UnstyledButton
-          onClick={onClick}
-          className={cx(classes.link, { [classes.active]: active })}
-        >
-          <Icon size="1.2rem" />
-        </UnstyledButton>
-      </Link>
+      <NavLink {...props}>
+        {({ isActive }) => (
+          <UnstyledButton
+            onClick={onClick}
+            className={cx(classes.link, { [classes.active]: isActive })}
+          >
+            <Icon size="1.2rem" />
+          </UnstyledButton>
+        )}
+      </NavLink>
     </Tooltip>
   )
 }
@@ -72,17 +72,7 @@ const mockdata = [
   { icon: AiFillSetting, label: 'Ustaweinia', to: routes['user-panel.settings'] },
 ]
 const UserSideBar = () => {
-  const [active, setActive] = useState(0)
-
-  const links = mockdata.map((link, index) => (
-    <NavbarLink
-      {...link}
-      key={link.label}
-      active={index === active}
-      onClick={() => setActive(index)}
-      to={link.to}
-    />
-  ))
+  const links = mockdata.map((link) => <NavbarLink {...link} key={link.label} to={link.to} />)
 
   return (
     <Navbar mih={'100%'} width={{ base: NAVBAR_WIDTH }} px="md" pb={'md'}>
