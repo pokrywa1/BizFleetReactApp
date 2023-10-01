@@ -1,11 +1,15 @@
 import { UserPanelSettingsChangePasswordForm } from '../../../components/user/settings/UserPanelSettingsChangePasswordForm.tsx'
-import Title from '../../../components/common/Typography/Title.tsx'
 import { Card, Divider } from '@mantine/core'
+import TitleWithSubtext from '../../../components/common/Typography/TitleWithSubtext.tsx'
 
 const VUserPanelSettings = () => {
   return (
     <Card>
-      <Title order={2}>Zmiana hasła</Title>
+      <TitleWithSubtext
+        title={'Zmiana hasła'}
+        subtext={'Pamiętaj, aby twoje hasło było wystarczająco silne'}
+        mb={'md'}
+      />
       <Divider />
       <UserPanelSettingsChangePasswordForm />
     </Card>

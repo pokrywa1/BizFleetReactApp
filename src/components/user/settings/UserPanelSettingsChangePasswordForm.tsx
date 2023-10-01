@@ -9,15 +9,19 @@ import InputPassword from '../../common/Inputs/InputPassword.tsx'
 import { SimpleGrid, Stack } from '@mantine/core'
 import { Button } from '../../common/Buttons/Button.tsx'
 import { LuSave } from 'react-icons/lu'
+import { toastSuccess } from '../../../app/utils/toastError.ts'
 
 export const UserPanelSettingsChangePasswordForm = () => {
-  const { methods, inputsNames, handleSubmit } = useFormMutation<changePasswordFormFields, unknown>(
-    changePasswordSchema,
-    putChangePasswordForm,
-    {
-      onSuccess: () => console.log('Zmieniono'),
+  const { isLoading, methods, inputsNames, handleSubmit } = useFormMutation<
+    changePasswordFormFields,
+    unknown
+  >(changePasswordSchema, putChangePasswordForm, {
+    onSuccess: () => {
+      toastSuccess('Haslo zostało zmienione')
+      methods.reset()
     },
-  )
+  })
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit}>
@@ -27,7 +31,14 @@ export const UserPanelSettingsChangePasswordForm = () => {
             <InputPassword name={inputsNames.newPassword} placeholder={'Nowe hasło'} />
             <InputPassword name={inputsNames.confirmPassword} placeholder={'Powtórz hasło'} />
           </SimpleGrid>
-          <Button type={'submit'} leftIcon={<LuSave />} w={'fit-content'} ml={'auto'} mt={'xs'}>
+          <Button
+            loading={isLoading}
+            type={'submit'}
+            leftIcon={<LuSave />}
+            w={'fit-content'}
+            ml={'auto'}
+            mt={'xs'}
+          >
             Zapisz
           </Button>
         </Stack>
