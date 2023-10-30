@@ -35,26 +35,46 @@ const CarAddReservation = ({ id, onClose }: CarAddReservationProps) => {
         type="range"
         value={value}
         onChange={setValue}
-        excludeDate={(date) =>
-          (data &&
+        locale={'pl'}
+        excludeDate={(date) => {
+          if (!date) {
+            // Jeśli data jest pusta (null), wyłącz ją.
+            return true
+          }
+
+          const currentDate = new Date(date)
+
+          // Ustalamy dzisiejszą datę
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+
+          // Jeśli data jest wcześniejsza niż dzisiaj, wyłącz ją.
+          if (currentDate < today) {
+            return true
+          }
+
+          // Tutaj dodajemy logikę sprawdzania disabledDate, jeśli data nie jest wcześniejsza niż dzisiaj.
+          if (
+            data &&
             data.some((disabledDate) => {
               const startTime = new Date(disabledDate.startTime)
               const endTime = new Date(disabledDate.endTime)
-              const currentDate = new Date(date)
 
-              const today = new Date()
-              today.setHours(0, 0, 0, 0)
-              if (currentDate < today) {
-                return true
-              }
               return (
                 currentDate <= endTime &&
                 currentDate >= startTime &&
                 disabledDate.reservationStatus.code !== 'Cancelled'
               )
-            })) as boolean
-        }
+            })
+          ) {
+            return true
+          }
+
+          // Jeśli żaden warunek nie jest spełniony, to data jest dostępna.
+          return false
+        }}
       />
+
       <Button disabled={value[0] === null || value[1] === null} onClick={handleReservationSubmit}>
         Zatwierdź
       </Button>
