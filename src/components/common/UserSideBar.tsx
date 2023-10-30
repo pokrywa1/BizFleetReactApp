@@ -66,13 +66,15 @@ function NavbarLink({ icon: Icon, label, onClick, ...props }: NavbarLinkProps) {
 }
 
 const mockdata = [
-  { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel'] },
+  { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel.dashboard'] },
   { icon: IoCarSharp, label: 'Flota', to: routes['user-panel.cars'] },
   { icon: BsFillPeopleFill, label: 'Pracownicy', to: routes['user-panel.members'] },
   { icon: AiFillSetting, label: 'Ustaweinia', to: routes['user-panel.settings'] },
 ]
 const UserSideBar = () => {
-  const links = mockdata.map((link) => <NavbarLink {...link} key={link.label} to={link.to} />)
+  const links = mockdata.map((link) => {
+    return <NavbarLink {...link} key={link.label} to={link.to} />
+  })
 
   return (
     <Navbar mih={'100%'} width={{ base: NAVBAR_WIDTH }} px="md" pb={'md'}>
