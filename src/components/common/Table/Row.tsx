@@ -41,8 +41,6 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
     }
   }
 
-  console.log(complementIndexes)
-
   return (
     <>
       <tr className={classes.tr}>
