@@ -22,7 +22,7 @@ const columns: TTableHeader = [
 export const OrganizationMemberDatatable = ({ members }: OrganizationMemberDatatableProps) => {
   return (
     <>
-      <Table.Container columns={columns}>
+      <Table.Container columns={columns} importantIndex={[1]}>
         {members.map((item) => (
           <Table.Row key={item.username}>
             <Text>{item.fullName}</Text>

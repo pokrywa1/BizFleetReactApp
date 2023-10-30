@@ -41,6 +41,8 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
     }
   }
 
+  console.log(complementIndexes)
+
   return (
     <>
       <tr className={classes.tr}>
@@ -68,7 +70,7 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
               <Stack>
                 {complementIndexes.map((index, i) => (
                   <>
-                    {i + 1 < complementIndexes.length ? (
+                    {i + 1 <= complementIndexes.length ? (
                       <Group position={'apart'} key={i}>
                         <Text size={'xs'} color={'gray.6'} key={Number(index)}>
                           {columns[index].name}

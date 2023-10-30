@@ -19,8 +19,6 @@ const headers: TTableHeader = [
   {
     name: 'Status',
   },
-
-  // { name: '' },
 ]
 export const CarReservationHistoryDatatable = () => {
   const { carId } = useParams()
@@ -46,3 +44,4 @@ export const CarReservationHistoryDatatable = () => {
     </Table.Container>
   )
 }
+
