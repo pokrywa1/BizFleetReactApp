@@ -38,22 +38,14 @@ const CarAddReservation = ({ id, onClose }: CarAddReservationProps) => {
         locale={'pl'}
         excludeDate={(date) => {
           if (!date) {
-            // Jeśli data jest pusta (null), wyłącz ją.
             return true
           }
-
           const currentDate = new Date(date)
-
-          // Ustalamy dzisiejszą datę
           const today = new Date()
           today.setHours(0, 0, 0, 0)
-
-          // Jeśli data jest wcześniejsza niż dzisiaj, wyłącz ją.
           if (currentDate < today) {
             return true
           }
-
-          // Tutaj dodajemy logikę sprawdzania disabledDate, jeśli data nie jest wcześniejsza niż dzisiaj.
           if (
             data &&
             data.some((disabledDate) => {
