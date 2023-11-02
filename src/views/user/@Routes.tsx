@@ -8,6 +8,7 @@ const VUserPanel = lazy(()=>import('./dashboard/VUserPanel.tsx'))
 const VCars = lazy(()=>import('./cars/VCars.tsx'))
 const VCar = lazy(()=>import('./cars/VCar.tsx'))
 const VMembers = lazy(()=>import('./organization/VOrganizationMembers.tsx'))
+const VOrganizationMember = lazy(()=>import('./organization/VOrganizationMember.tsx'))
 const VUserPanelSettings = lazy(()=>import('./settings/VUserPanelSettings.tsx'))
 export const UserRoutes=[
   <Route key={routes['user-panel']} path={routes['user-panel']} element={<RequireAuth><TemplateUserView/></RequireAuth>}>
@@ -16,6 +17,7 @@ export const UserRoutes=[
     <Route key={routes['user-panel.cars']} path={routes['user-panel.cars']} element= {<VCars/>}/>
     <Route key={routes['user-panel.car']()} path={routes['user-panel.car']()} element= {<VCar/>}/>
     <Route key={routes['user-panel.members']} path={routes['user-panel.members']} element= {<VMembers/>}/>
+    <Route key={routes['user-panel.member']()} path={routes['user-panel.member']()} element= {<VOrganizationMember/>}/>
     <Route key={routes['user-panel.settings']} path={routes['user-panel.settings']} element= {<VUserPanelSettings/>}/>
   </Route>
 ]
