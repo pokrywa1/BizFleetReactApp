@@ -1,4 +1,4 @@
-import { Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core'
+import { Anchor, Paper, Title, Text, Container, Button } from '@mantine/core'
 import InputText from '../../common/Inputs/InputText.tsx'
 import InputPassword from '../../common/Inputs/InputPassword.tsx'
 import { FormProvider } from 'react-hook-form'
@@ -12,7 +12,7 @@ import {
 import useFormMutation from '../../../app/hook/useFormMutation.tsx'
 import useUserStore from '../../../app/store/useUserStore.ts'
 import useLocalStorage from '../../../app/hook/localStorage/useLocalStorage.ts'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../../app/router'
 
 const SignIn = () => {
@@ -43,7 +43,7 @@ const SignIn = () => {
       <Text color="dimmed" size="sm" align="center" mt={5}>
         Nie masz jeszcze konta?{' '}
         <Anchor size="sm" component="button">
-          Utwórz konto
+          <Link to={routes['auth.register']}>Utwórz konto</Link>
         </Anchor>
       </Text>
 
@@ -57,11 +57,7 @@ const SignIn = () => {
               placeholder="Your password"
               mt="md"
             />
-            <Group position="apart" mt="lg">
-              <Anchor component="button" size="sm">
-                Forgot password?
-              </Anchor>
-            </Group>
+
             <Button type={'submit'} fullWidth mt="xl">
               Sign in
             </Button>

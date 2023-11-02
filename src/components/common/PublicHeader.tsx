@@ -16,7 +16,7 @@ const PublicHeader = () => {
           <ButtonLink variant={'outline'} to={routes['auth.login']} size="md">
             Logowanie
           </ButtonLink>
-          <ButtonLink to={routes['auth.login']} size="md">
+          <ButtonLink to={routes['auth.register']} size="md">
             Rejestracja
           </ButtonLink>
         </Group>

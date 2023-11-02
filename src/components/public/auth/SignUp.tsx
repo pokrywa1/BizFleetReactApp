@@ -9,7 +9,7 @@ import { Anchor, Button, Container, Group, Paper, Text, Title } from '@mantine/c
 import { FormProvider } from 'react-hook-form'
 import InputText from '../../common/Inputs/InputText.tsx'
 import InputPassword from '../../common/Inputs/InputPassword.tsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../../app/router'
 import toast from 'react-hot-toast'
 
@@ -39,7 +39,7 @@ const SignUp = () => {
       <Text color="dimmed" size="sm" align="center" mt={5}>
         Posiadadasz konto?{' '}
         <Anchor size="sm" component="button">
-          Zaloguj się
+          <Link to={routes['auth.login']}>Zaloguj się</Link>
         </Anchor>
       </Text>
 
