@@ -1,7 +1,7 @@
 import { TCar } from '../../../../app/api/user/cars/getCars.tsx'
 import { Card, createStyles, Divider, Image, Stack } from '@mantine/core'
 import Title from '../../../common/Typography/Title.tsx'
-import { CarPropertyDetailsCard } from '../CarPropertyDetailsCard.tsx'
+import { DetailsCard } from '../../../common/Cards/DetailsCard.tsx'
 import { useGetDocument } from '../../../../app/api/user/documents/getDocument.tsx'
 import { CarReservationHistoryDatatable } from './CarReservationHistoryDatatable.tsx'
 
@@ -62,9 +62,9 @@ export const CarBannerCard = ({ car }: CarBannerCardProps) => {
           <Title order={3}>{car.model}</Title>
           <Divider my={10} />
           <Stack spacing={'xs'}>
-            <CarPropertyDetailsCard name="Rocznik" value={car.year.toString()} />
-            <CarPropertyDetailsCard name="Rejestracja" value={car.licensePlate} />
-            <CarPropertyDetailsCard name="Rocznik" value={car.year.toString()} />
+            <DetailsCard name="Rocznik" value={car.year.toString()} />
+            <DetailsCard name="Rejestracja" value={car.licensePlate} />
+            <DetailsCard name="Rocznik" value={car.year.toString()} />
           </Stack>
         </Card>
       </div>

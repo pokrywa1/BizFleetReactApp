@@ -1,12 +1,12 @@
 import { Card, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { AiFillCalendar } from 'react-icons/ai'
 
-type CarPropertyDetailsCardProps = {
+type DetailsCardProps = {
   name: string
   value: string
 }
 
-export const CarPropertyDetailsCard = ({ name, value }: CarPropertyDetailsCardProps) => {
+export const DetailsCard = ({ name, value }: DetailsCardProps) => {
   return (
     <Card withBorder>
       <Group noWrap>
