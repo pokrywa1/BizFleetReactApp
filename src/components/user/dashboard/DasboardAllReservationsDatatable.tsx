@@ -50,7 +50,7 @@ const DasboardAllReservationsDatatable = ({
           <>
             <Table.Row key={item.id}>
               {user ? (
-                <AnchorLink to={routes['user-panel.car'](item.userId)}>
+                <AnchorLink to={routes['user-panel.member'](item.userId)}>
                   {item.user.username}
                 </AnchorLink>
               ) : (

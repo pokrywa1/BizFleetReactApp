@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 
 export type TOrganizationRole = 'admin' | 'user'
 
-export type TOrganization = {
+export type TOrganizationMember = {
   id: string
   username: string
   fullName: string
@@ -12,7 +12,7 @@ export type TOrganization = {
   role: TOrganizationRole
 }
 export const getOrganization = () =>
-  axios.get<TOrganization[]>(`${API_URL}/organizations`).then(({ data }) => data)
+  axios.get<TOrganizationMember[]>(`${API_URL}/organizations`).then(({ data }) => data)
 
 export const useGetOrganization = () =>
   useQuery({
