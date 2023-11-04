@@ -2,9 +2,10 @@ import { useParams } from 'react-router-dom'
 import { useGetCarReservation } from '../../../../app/api/user/cars/getCarReservation.ts'
 import { Table } from '../../../common/Table/Table.tsx'
 import { TTableHeader } from '../../dashboard/DasboardAllReservationsDatatable.tsx'
-import { Badge, Text } from '@mantine/core'
+import { Badge } from '@mantine/core'
 import * as dayjs from 'dayjs'
 import { getBadgeColor } from '../../../../app/utils/getBadgeColor.ts'
+import { Text } from '../../../common/Typography/Text.tsx'
 
 const headers: TTableHeader = [
   {
@@ -44,4 +45,3 @@ export const CarReservationHistoryDatatable = () => {
     </Table.Container>
   )
 }
-

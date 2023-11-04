@@ -1,4 +1,4 @@
-import { Stack, StackProps, Text } from '@mantine/core'
+import { Stack, StackProps, Text, useMantineTheme } from '@mantine/core'
 import Title from './Title.tsx'
 
 type TTitleWithSubtextProps = {
@@ -7,10 +7,11 @@ type TTitleWithSubtextProps = {
 } & StackProps
 
 const TitleWithSubtext = ({ title, subtext, ...props }: TTitleWithSubtextProps) => {
+  const theme = useMantineTheme()
   return (
     <Stack spacing={0} mb={0} {...props}>
       <Title order={3}>{title}</Title>
-      <Text fz={15} color={'gray'}>
+      <Text fz={15} color={theme.colorScheme === 'dark' ? 'gray.5' : 'gray'}>
         {subtext}
       </Text>
     </Stack>

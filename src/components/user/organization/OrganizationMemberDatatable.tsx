@@ -1,10 +1,11 @@
 import { TOrganizationMember } from '../../../app/api/user/organization/getOrganization.ts'
 import { TTableHeader } from '../dashboard/DasboardAllReservationsDatatable.tsx'
 import { Table } from '../../common/Table/Table.tsx'
-import { Badge, Text } from '@mantine/core'
+import { Badge } from '@mantine/core'
 import { getBadgeColor } from '../../../app/utils/getBadgeColor.ts'
 import { AnchorLink } from '../../common/Typography/AnchorLink.tsx'
 import { routes } from '../../../app/router'
+import { Text } from '../../common/Typography/Text.tsx'
 
 type OrganizationMemberDatatableProps = {
   members: TOrganizationMember[]

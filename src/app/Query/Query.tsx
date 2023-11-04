@@ -1,6 +1,6 @@
 import { UseQueryResult } from 'react-query'
 import { ReactNode } from 'react'
-import { Stack, Text } from '@mantine/core'
+import { Stack, Text, useMantineTheme } from '@mantine/core'
 
 export type QueryWrapperProps<T> = {
   query: UseQueryResult<T>
@@ -8,16 +8,18 @@ export type QueryWrapperProps<T> = {
 }
 
 export const QueryWrapper = <T,>({ query, children }: QueryWrapperProps<T>) => {
+  const theme = useMantineTheme()
+
   if (!query) throw new Error('Missing query data')
   if (query.isLoading)
     return (
-      <Text fz={'sm'} color={'dark'}>
+      <Text fz={'sm'} color={theme.colorScheme === 'dark' ? 'gray.5' : 'gray'}>
         Ładowanie
       </Text>
     )
   if (query.isError)
     return (
-      <Text fz={'sm'} color={'dark'}>
+      <Text fz={'sm'} color={theme.colorScheme === 'dark' ? 'gray.5' : 'gray'}>
         Błąd wczytywania danych
       </Text>
     )
@@ -29,7 +31,7 @@ export const QueryWrapper = <T,>({ query, children }: QueryWrapperProps<T>) => {
       return <Stack>{children instanceof Function ? children(query.data) : children}</Stack>
     else
       return (
-        <Text fz={'sm'} color={'dark'}>
+        <Text fz={'sm'} color={theme.colorScheme === 'dark' ? 'gray.5' : 'gray'}>
           Brak informacji
         </Text>
       )

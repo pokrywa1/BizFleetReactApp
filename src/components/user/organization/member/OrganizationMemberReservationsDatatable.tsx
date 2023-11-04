@@ -3,9 +3,10 @@ import { TTableHeader } from '../../dashboard/DasboardAllReservationsDatatable.t
 import { Table } from '../../../common/Table/Table.tsx'
 import { AnchorLink } from '../../../common/Typography/AnchorLink.tsx'
 import { routes } from '../../../../app/router'
-import { Badge, Text } from '@mantine/core'
+import { Badge } from '@mantine/core'
 import { getBadgeColor } from '../../../../app/utils/getBadgeColor.ts'
 import * as dayjs from 'dayjs'
+import { Text } from '../../../common/Typography/Text.tsx'
 
 type OrganizationMemberReservationsDatatableProps = {
   reservations: TReservation[]

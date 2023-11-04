@@ -101,15 +101,11 @@ const UserCurrentReservationCard = ({
         <Divider orientation="horizontal" my={'xs'} />
         <Group position={'apart'}>
           <Text>Data od</Text>
-          <Text fz={'sm'} color={'dark'}>
-            {dayjs(startTime).format('DD.MM.YYYY')}
-          </Text>
+          <Text fz={'sm'}>{dayjs(startTime).format('DD.MM.YYYY')}</Text>
         </Group>
         <Group position={'apart'}>
           <Text>Data do</Text>
-          <Text fz={'sm'} color={'dark'}>
-            {dayjs(endTime).format('DD.MM.YYYY')}
-          </Text>
+          <Text fz={'sm'}>{dayjs(endTime).format('DD.MM.YYYY')}</Text>
         </Group>
         <Card.Section className={classes.section}>
           <Button onClick={() => setOpenedModal(true)} fullWidth>

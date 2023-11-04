@@ -23,7 +23,7 @@ const useStyle = createStyles((theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
     boxSizing: 'border-box',
-    backgroundColor: '#F8F9FA',
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#F8F9FA',
     minHeight: `calc(100vh - ${theme.spacing.xl})`, // Użyj calc do ustawienia minimalnej wysokości
   },
 }))

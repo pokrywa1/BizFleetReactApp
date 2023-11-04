@@ -9,7 +9,7 @@ type TitleProps = {
 
 const useStyle = createStyles((theme) => ({
   title: {
-    color: theme.colors.dark[5],
+    color: theme.colorScheme === 'dark' ? theme.colors.gray[0] : theme.colors.dark[5],
   },
 }))
 const Title = ({ children, ...props }: TitleProps) => {
