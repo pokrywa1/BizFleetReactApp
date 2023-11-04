@@ -27,7 +27,7 @@ const SignIn = () => {
       if (data.accessToken) {
         setUserAuth(data)
         setJwt(data.accessToken)
-        navigate(routes['user-panel'])
+        navigate(routes['user-panel.dashboard'])
       }
     },
   })
