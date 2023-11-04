@@ -1,5 +1,14 @@
 import React from 'react'
-import { ActionIcon, Collapse, createStyles, Divider, Group, Stack, Text } from '@mantine/core'
+import {
+  ActionIcon,
+  Collapse,
+  createStyles,
+  Divider,
+  Group,
+  Stack,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
 import { useTableContext } from './Container.tsx'
 import { useDisclosure } from '@mantine/hooks'
 import { AiOutlineArrowDown } from 'react-icons/ai'
@@ -10,7 +19,7 @@ type TableRowProps = {
 
 const useStyle = createStyles(() => ({
   tr: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
   },
   tdControls: {
     textAlign: 'right',
@@ -34,6 +43,8 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
   const { importantIndex, isMobile, columns } = useTableContext()
   const children = React.Children.toArray(_children)
   const complementIndexes = []
+
+  const theme = useMantineTheme()
 
   for (let i = 0; i < children.length; i++) {
     if (!importantIndex?.includes(i)) {
@@ -79,7 +90,9 @@ const _TableRow = ({ children: _children }: TableRowProps) => {
                       children[index]
                     )}
 
-                    {i + 1 < complementIndexes.length && <Divider color={'gray.2'} />}
+                    {i + 1 < complementIndexes.length && (
+                      <Divider color={theme.colorScheme === 'dark' ? 'dark.4' : 'gray.2'} />
+                    )}
                   </>
                 ))}
               </Stack>
