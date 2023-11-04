@@ -2,6 +2,7 @@ import { createStyles } from '@mantine/core'
 import { TTableHeader } from '../../user/dashboard/DasboardAllReservationsDatatable.tsx'
 import { createContext, useContext } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
+import { Text } from '../Typography/Text.tsx'
 
 const useStyle = createStyles((theme) => ({
   container: {
@@ -13,6 +14,9 @@ const useStyle = createStyles((theme) => ({
 
     borderCollapse: 'separate',
     borderSpacing: `0 10px`,
+    '& > tbody > tr': {
+      backgroundColor: 'transparent',
+    },
     '& > thead > tr > th, & > tbody > tr > td': {
       backgroundColor: theme.colorScheme == 'light' ? theme.white : theme.colors.dark[6],
       padding: '15px 20px',
@@ -92,7 +96,7 @@ const _TableHead = () => {
           columns.map((item, index) => {
             return (
               <th className={classes.th} key={index} scope="col">
-                {item.name ?? ''}
+                <Text>{item.name ?? ''}</Text>
               </th>
             )
           })}
@@ -100,7 +104,7 @@ const _TableHead = () => {
           isMobile &&
           importantIndex.map((index) => (
             <th className={classes.th} key={index} scope="col">
-              {columns[index].name}
+              <Text>{columns[index].name}</Text>
             </th>
           ))}
         {importantIndex && isMobile && <th className={classes.th} scope="col"></th>}
