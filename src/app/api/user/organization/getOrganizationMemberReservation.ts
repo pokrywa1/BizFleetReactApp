@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 
 export const getOrganizationMemberReservation = (
   userId: string | undefined,
-): Promise<AxiosResponse<TReservation>['data']> => {
+): Promise<AxiosResponse<TReservation[]>['data']> => {
   if (!userId) new Error('getOrganizationMemberReservation: userId is undefined or null')
   return axios({
     method: 'GET',
