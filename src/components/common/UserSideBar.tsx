@@ -17,6 +17,15 @@ import { IoCarSharp } from 'react-icons/io5'
 import { LinkProps, NavLink } from 'react-router-dom'
 import { routes } from '../../app/router'
 import { BsFillPeopleFill } from 'react-icons/bs'
+import { TUserAccountRole } from '../../app/api/public/auth/getMe.ts'
+import useUserStore from '../../app/store/useUserStore.ts'
+
+type TMenuItem = {
+  icon: IconType
+  label: string
+  to: string
+  role?: TUserAccountRole
+}
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -45,35 +54,39 @@ type NavbarLinkProps = {
   icon: IconType
   label: string
   onClick?(): void
+  role?: TUserAccountRole
 } & LinkProps
 
-function NavbarLink({ icon: Icon, label, onClick, ...props }: NavbarLinkProps) {
+function NavbarLink({ icon: Icon, label, onClick, role = 'user', ...props }: NavbarLinkProps) {
   const { classes, cx } = useStyles()
+  const { user } = useUserStore()
   return (
-    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }} zIndex={10000}>
-      <NavLink {...props}>
-        {({ isActive }) => (
-          <UnstyledButton
-            onClick={onClick}
-            className={cx(classes.link, { [classes.active]: isActive })}
-          >
-            <Icon size="1.2rem" />
-          </UnstyledButton>
-        )}
-      </NavLink>
-    </Tooltip>
+    (role === 'user' || (role === 'admin' && user?.role === 'admin')) && (
+      <Tooltip label={label} position="right" transitionProps={{ duration: 0 }} zIndex={10000}>
+        <NavLink {...props}>
+          {({ isActive }) => (
+            <UnstyledButton
+              onClick={onClick}
+              className={cx(classes.link, { [classes.active]: isActive })}
+            >
+              <Icon size="1.2rem" />
+            </UnstyledButton>
+          )}
+        </NavLink>
+      </Tooltip>
+    )
   )
 }
 
-const mockdata = [
+const mockdata: TMenuItem[] = [
   { icon: BiSolidDashboard, label: 'Home', to: routes['user-panel.dashboard'] },
   { icon: IoCarSharp, label: 'Flota', to: routes['user-panel.cars'] },
-  { icon: BsFillPeopleFill, label: 'Pracownicy', to: routes['user-panel.members'] },
+  { icon: BsFillPeopleFill, label: 'Pracownicy', to: routes['user-panel.members'], role: 'admin' },
   { icon: AiFillSetting, label: 'Ustaweinia', to: routes['user-panel.settings'] },
 ]
 const UserSideBar = () => {
   const links = mockdata.map((link) => {
-    return <NavbarLink {...link} key={link.label} to={link.to} />
+    return <NavbarLink {...link} key={link.label} to={link.to} role={link.role} />
   })
 
   return (
